@@ -49,7 +49,7 @@ class ProductsController extends Controller
             'description' => 'required',
         ]);
 
-        return $request;
+        // return $request;
 
         //Create products
         $product = new Product;
@@ -59,20 +59,21 @@ class ProductsController extends Controller
         $product->currency = $request->input('currency');
         $product->description = $request->input('description');
         $product->notetocustomer = $request->input('notetocustomer');
-        $product->save();
-
-        // foreach ($request->title as $item => $value) {
-        //     $data = [
-        //         'prod_id' = $request->$product->id,
-        //         'code' = $request->input('code[]')
-        //     ];
-        // }
-
-        // $item = new Item;
-        // $item->prod_id = $product->id;
-        // $item->code = $request->input('code[]');
-        // $item->save();
-
+        
+        if($product->save()) {
+            $item_code = $request->input('code');
+        
+            foreach ($request->code as $key => $value) {
+                $item = new Item;
+                $item->prod_id = $product->id;
+                $item->code = $item_code[$key];
+                $item->save();
+            }
+        }
+        
+        
+        
+        
         return redirect('/products');
     }
 
