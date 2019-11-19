@@ -1,1 +1,3 @@
-## Insatallation
+## Installation
+
+- installation area
