@@ -49,6 +49,8 @@ class ProductsController extends Controller
             'description' => 'required',
         ]);
 
+        return $request;
+
         //Create products
         $product = new Product;
         $product->user_id = auth()->user()->id;

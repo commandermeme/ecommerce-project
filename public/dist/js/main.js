@@ -510,7 +510,7 @@ var brandBoxChart4 = new Chart($('#social-box-chart-4'), {
 //Add product item
 $('#add_item').on('click', function() {
   let itemRow = '<tr>' +
-                  '<td><input type="text" class="form-control" name="serial[]"></td>' +
+                  '<td><input type="text" class="form-control" name="code[]"></td>' +
                   '<td><button class="btn btn-danger remove_item"><i class="fa fa-close"></i></button></td>' +
                 '</tr>'
   $('#item_body').append(itemRow);
