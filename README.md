@@ -1,3 +1,9 @@
-## Installation
+# Installation
 
-- installation area
+### Steps
+
+``` bash
+# clone
+$ https://github.com/commandermeme/ecommerce-project.git
+
+```
