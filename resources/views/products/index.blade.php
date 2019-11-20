@@ -21,41 +21,41 @@
                         <thead>
                             <tr>
                                 <th>Title</th>
-                                <th>Type</th>
-                                <th>Stock</th>
-                                <th>Revenue</th>
+                                <th>Price</th>
+                                <th class="d-none d-sm-table-cell">Type</th>
+                                <th class="d-none d-sm-table-cell">Stock</th>
+                                <th class="d-none d-sm-table-cell">Revenue</th>
                                 <th>Options</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if (count($products) > 0)
-                                @foreach ($products as $product)
-                                    <tr>
-                                        
-                                        <td>
-                                            {{ $product->title }}
-                                            {{-- <p>
-                                                <a href="#"><small class="text-muted">988fe523</small></a>
-                                            </p> --}}
-                                        </td>
-                                        <td>
-                                            <span class="badge badge-success">Serial/Codes</span>
-                                        </td>
-                                        <td>4</td>
-                                        <td>$0.00</td>
-                                        <td>
-                                            <a class="btn btn-success" href="#">
-                                                <i class="fa fa-search-plus"></i>
-                                            </a>
-                                            <a class="btn btn-info" href="#">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                            <a class="btn btn-danger" href="#">
-                                                <i class="fa fa-trash-o"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                @foreach ($stocks as $stock)
+                                    @foreach ($products as $product)
+                                        @if ($product->id == $stock->prod_id)
+                                            <tr>
+                                                <td>{{ $product->title }}</td>
+                                                <td>{{ $product->price .' '. $product->currency}}</td>
+                                                <td class="d-none d-sm-table-cell">
+                                                    <span class="badge badge-success">Serial/Codes</span>
+                                                </td>
+                                                <td class="d-none d-sm-table-cell">{{ $stock->stock }}</td>
+                                                <td class="d-none d-sm-table-cell">$0.00</td>
+                                                <td>
+                                                    <a class="btn btn-success" href="#">
+                                                        <i class="fa fa-search-plus"></i>
+                                                    </a>
+                                                    <a class="btn btn-info" href="#">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                    <a class="btn btn-danger" href="#">
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endif    
+                                    @endforeach
+                                @endforeach   
                             @endif
                         </tbody>
                     </table>

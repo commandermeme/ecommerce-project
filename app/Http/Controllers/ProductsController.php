@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Item;
+use App\Stock;
 
 class ProductsController extends Controller
 {
@@ -21,8 +22,9 @@ class ProductsController extends Controller
     public function index()
     {
         $products = Product::all();
+        $stocks = Stock::all();
 
-        return view('products.index')->with('products', $products);
+        return view('products.index')->with('products', $products)->with('stocks', $stocks);
     }
 
     /**
@@ -69,10 +71,15 @@ class ProductsController extends Controller
                 $item->code = $item_code[$key];
                 $item->save();
             }
+            
         }
         
+        $items = $item->where('prod_id', $product->id)->count();
         
-        
+        $stock = new Stock;
+        $stock->prod_id = $product->id;
+        $stock->stock = $items;
+        $stock->save();
         
         return redirect('/products');
     }

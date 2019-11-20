@@ -30,13 +30,13 @@
                                                 <a href="#" class="dropdown-item">BAR</a>
                                             </div> --}}
                                             <select class="btn btn-primary" name="currency" id="">
-                                                <option value="usd">USD</option>
-                                                <option value="php">PHP</option>
-                                                <option value="cad">CAD</option>
-                                                <option value="eur">EUR</option>
-                                                <option value="jpy">JPY</option>
-                                                <option value="gbp">GBP</option>
-                                                <option value="zar">ZAR</option>
+                                                <option value="USD">USD</option>
+                                                <option value="PHP">PHP</option>
+                                                <option value="CAD">CAD</option>
+                                                <option value="EUR">EUR</option>
+                                                <option value="JPY">JPY</option>
+                                                <option value="GBP">GBP</option>
+                                                <option value="ZAR">ZAR</option>
                                             </select>
                                         </div>
                                     </div>
