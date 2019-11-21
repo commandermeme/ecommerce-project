@@ -34,7 +34,7 @@
                                     @foreach ($products as $product)
                                         @if ($product->id == $stock->prod_id)
                                             <tr>
-                                                <td>{{ $product->title }}</td>
+                                                <td><a class="" href="/stores" target="_blank" rel="noopener noreferrer">{{ $product->title }}</a></td>
                                                 <td>{{ $product->price .' '. $product->currency}}</td>
                                                 <td class="d-none d-sm-table-cell">
                                                     <span class="badge badge-success">Serial/Codes</span>
@@ -43,9 +43,9 @@
                                                 <td class="d-none d-sm-table-cell">$0.00</td>
                                                 <td>
                                                     <a class="btn btn-success" href="#">
-                                                        <i class="fa fa-search-plus"></i>
+                                                        <i class="icon-graph"></i>
                                                     </a>
-                                                    <a class="btn btn-info" href="#">
+                                                    <a class="btn btn-info" href="/products/{{ $product->id }}/edit">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                     <a class="btn btn-danger" href="#">

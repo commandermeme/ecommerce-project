@@ -13,6 +13,7 @@
                 <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="/pricing">Pricing</a></li>
                 <li class="nav-item"><a class="nav-link" href="/developer">Developer</a></li>
+                <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->

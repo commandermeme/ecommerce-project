@@ -73,7 +73,7 @@
             </div>
 
             <a class="dropdown-item" href="#">
-                <i class="fa fa-tasks"></i> Greencity
+                <i class="fa fa-tasks"></i> {{ auth()->user()->name }}
                 <p class="text-muted">View or create Shops</p>
             </a>
 

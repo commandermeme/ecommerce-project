@@ -26,6 +26,7 @@ Route::resource('products', 'ProductsController');
 Route::resource('coupons', 'CouponsController');
 Route::resource('blacklist', 'BlacklistController');
 Route::resource('user_pages', 'UserPagesController');
+Route::resource('stores', 'StoresController');
 
 Auth::routes(['verify' => true]);
 

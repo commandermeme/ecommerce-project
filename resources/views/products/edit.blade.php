@@ -3,9 +3,11 @@
 @section('content')
     <div class="container-fluid">
         <div class="animated fadein">
-            <h2 class="my-4">New Product</h2>
-            {!! Form::open(['action' => 'ProductsController@store', 'method' => 'POST', 'id' => 'signupForm']) !!}
+            <h2 class="my-4">Update Product</h2>
+            {!! Form::open(['action' => ['ProductsController@update', $product->id], 'method' => 'POST', 'id' => 'signupForm']) !!}
                 @csrf
+                @method('PUT')
+
                 <div class="card">
                     <div class="card-header border-0">
                         {{-- <h5 class="text-muted">General Information</h5> --}}
@@ -16,21 +18,21 @@
                             <div class="col-md-9">
                                 <div class="form-group">
                                     <label for=""><strong>Title</strong></label>
-                                    <input id="title" name="title" type="text" class="form-control" placeholder="Title">
+                                    <input id="title" name="title" type="text" class="form-control" placeholder="Title" value="{{ $product->title }}">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for=""><strong>Price</strong></label>
                                     <div class="input-group">
-                                        <input name="price" type="number" class="form-control" placeholder="Price">
+                                        <input name="price" type="number" class="form-control" placeholder="Price" value="{{ $product->price }}">
                                         <div class="input-group-prepend">
                                             {{-- <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">USD<span class="caret"></span></button>
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <a href="#" class="dropdown-item">PHP</a>
                                                 <a href="#" class="dropdown-item">BAR</a>
                                             </div> --}}
-                                            <select class="btn btn-primary" name="currency" id="">
+                                            <select class="btn btn-primary" name="currency" id="" value="{{ $product->currency }}">
                                                 <option value="USD">USD</option>
                                                 <option value="PHP">PHP</option>
                                                 <option value="CAD">CAD</option>
@@ -48,7 +50,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for=""><strong>Description</strong></label>
-                                    <textarea class="form-control" name="description" cols="30" rows="10"></textarea>
+                                    <textarea class="form-control" name="description" cols="30" rows="10">{{ $product->description }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -118,10 +120,14 @@
                                         </tr>
                                     </thead>
                                     <tbody id="item_body">
+                                        
+                                            {{-- @foreach ($product as $product) --}}
                                         <tr>
-                                            <td><input type="text" class="form-control" name="code[]"></td>
-                                            <td><button class="btn btn-danger remove_item"><i class="fa fa-close"></i></button></td>
+                                                <td><input type="text" class="form-control" name="code[]" value="{{ $product->code }}"></td>
+                                                <td><button class="btn btn-danger remove_item"><i class="fa fa-close"></i></button></td>
+                                           
                                         </tr>
+                                        {{-- @endforeach --}}
                                     </tbody>
                                 </table>
                             </div>
@@ -155,7 +161,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="note"><strong>Note to Customer</strong> <small class="text-muted"><em>Optional</em></small></label>
-                                    <textarea class="form-control" name="notetocustomer" id="note" cols="30" rows="5"></textarea>
+                                    <textarea class="form-control" name="notetocustomer" id="note" cols="30" rows="5">{{ $product->notetocustomer }}</textarea>
                                 </div>
                             </div>
                             <div class="col-md-12">

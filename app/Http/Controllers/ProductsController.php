@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 use App\Product;
 use App\Item;
 use App\Stock;
@@ -24,7 +25,10 @@ class ProductsController extends Controller
         $products = Product::all();
         $stocks = Stock::all();
 
-        return view('products.index')->with('products', $products)->with('stocks', $stocks);
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+
+        return view('products.index')->with('products', $products)->with('stocks', $stocks)->with('products', $user->products);
     }
 
     /**
@@ -103,7 +107,8 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        return view('products.edit')->with('product', $product);
     }
 
     /**
@@ -115,7 +120,36 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //Update products
+
+        $product = Product::find($id);
+        $product->user_id = auth()->user()->id;
+        $product->title = $request->input('title');
+        $product->price = $request->input('price');
+        $product->currency = $request->input('currency');
+        $product->description = $request->input('description');
+        $product->notetocustomer = $request->input('notetocustomer');
+        
+        if($product->save()) {
+            $item_code = $request->input('code');
+        
+            foreach ($request->code as $key => $value) {
+                $item = Item::find($product->id);
+                $item->prod_id = $product->id;
+                $item->code = $item_code[$key];
+                $item->save();
+            }
+            
+        }
+        
+        $items = $item->where('prod_id', $product->id)->count();
+        
+        $stock = new Stock;
+        $stock->prod_id = $product->id;
+        $stock->stock = $items;
+        $stock->save();
+        
+        return redirect('/products');
     }
 
     /**
