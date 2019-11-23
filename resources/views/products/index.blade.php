@@ -45,7 +45,7 @@
                                                     <a class="btn btn-success" href="#">
                                                         <i class="icon-graph"></i>
                                                     </a>
-                                                    <a class="btn btn-info" href="/products/{{ $product->id }}/edit">
+                                                    <a class="btn btn-info" href="#{{--/products/{{ $product->id }}/edit--}}">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                     <a class="btn btn-danger" href="#">

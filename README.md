@@ -4,6 +4,8 @@
 
 ``` bash
 # clone
-$ https://github.com/commandermeme/ecommerce-project.git
+$ git clone https://github.com/commandermeme/ecommerce-project.git
 
+# additional command bro for storage
+$ php artisan storage:link
 ```

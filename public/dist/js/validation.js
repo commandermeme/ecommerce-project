@@ -43,6 +43,10 @@ $('#signupForm').validate({
     description: {
       required: true,
       minlength: 5
+    },
+    code: {
+      required: true,
+      minlength: 5
     }
 
   },
@@ -72,6 +76,10 @@ $('#signupForm').validate({
     price: 'Please enter your a number',
     description: {
       required: 'Please enter a desciption',
+      minlength: 'Your description must consist of at least 5 characters'
+    },
+    code: {
+      required: 'Please enter a code',
       minlength: 'Your description must consist of at least 5 characters'
     }
   },

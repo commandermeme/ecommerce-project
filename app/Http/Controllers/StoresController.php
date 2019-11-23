@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Product;
+use App\User;
+use App\Stock;
 
 class StoresController extends Controller
 {
@@ -13,7 +16,13 @@ class StoresController extends Controller
      */
     public function index()
     {
-        return view('stores.index');
+        $products = Product::all();
+        $stocks = Stock::all();
+
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+
+        return view('stores.index')->with('products', $products)->with('stocks', $stocks)->with('products', $user->products);
     }
 
     /**
@@ -23,7 +32,7 @@ class StoresController extends Controller
      */
     public function create()
     {
-        return view('stores.denomination');
+        return view('stores.create');
     }
 
     /**

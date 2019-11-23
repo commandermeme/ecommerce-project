@@ -53,9 +53,21 @@ class ProductsController extends Controller
             'title' => 'required',
             'price' => 'required',
             'description' => 'required',
+            'prod_image' => 'image|nullable|max:1999',
         ]);
-
-        // return $request;
+            
+        //Handle file upload
+        if ($request->hasFile('prod_image')) {
+            $filenameWithExt = $request->file('prod_image')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extention = $request->file('prod_image')->getClientOriginalExtension();
+            $fileNameToStore = $filename. '_' .time(). '.' .$extention;
+            $path = $request->file('prod_image')->storeAs('public/prod_images', $fileNameToStore);
+            
+        } else {
+            $fileNameToStore = 'noimage.jpg';
+        }
+        
 
         //Create products
         $product = new Product;
@@ -65,6 +77,7 @@ class ProductsController extends Controller
         $product->currency = $request->input('currency');
         $product->description = $request->input('description');
         $product->notetocustomer = $request->input('notetocustomer');
+        $product->prod_image = $fileNameToStore;
         
         if($product->save()) {
             $item_code = $request->input('code');

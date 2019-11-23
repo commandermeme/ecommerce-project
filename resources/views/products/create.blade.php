@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="animated fadein">
             <h2 class="my-4">New Product</h2>
-            {!! Form::open(['action' => 'ProductsController@store', 'method' => 'POST', 'id' => 'signupForm']) !!}
+            {!! Form::open(['action' => 'ProductsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'id' => 'signupForm']) !!}
                 @csrf
                 <div class="card">
                     <div class="card-header border-0">
@@ -148,7 +148,7 @@
                                 <div class="form-group">
                                     <label for="file-input"><strong>Image</strong> <small class="text-muted"><em>optional</em></small></label>
                                     <div class="col-md-9">
-                                        <input id="file-input" type="file" name="image">
+                                        <input id="file-input" type="file" name="prod_image">
                                     </div>
                                 </div>
                             </div>
