@@ -19,10 +19,8 @@ class StoresController extends Controller
         $products = Product::all();
         $stocks = Stock::all();
 
-        $user_id = auth()->user()->id;
-        $user = User::find($user_id);
 
-        return view('stores.index')->with('products', $products)->with('stocks', $stocks)->with('products', $user->products);
+        return view('stores.index')->with('products', $products)->with('stocks', $stocks);
     }
 
     /**
@@ -32,7 +30,7 @@ class StoresController extends Controller
      */
     public function create()
     {
-        return view('stores.create');
+        // return view('stores.create');
     }
 
     /**
@@ -54,7 +52,11 @@ class StoresController extends Controller
      */
     public function show($id)
     {
-        //
+        
+        $product =  Product::find($id);
+        $stock = Stock::find($id);
+        
+        return view('stores.show')->with('product', $product)->with('stock', $stock);
     }
 
     /**
