@@ -510,22 +510,21 @@ var brandBoxChart4 = new Chart($('#social-box-chart-4'), {
 //Add product item
 $('#add_item').on('click', function() {
   let itemRow = '<tr>' +
-                  '<td><input type="text" class="form-control" name="code[]"></td>' +
-                  '<td><button class="btn btn-danger remove_item"><i class="fa fa-close"></i></button></td>' +
+                  '<td><input type="text" class="form-control" name="code[]" value=""></td>' +
+                  '<td><button type="button" class="btn btn-danger remove_item"><i class="fa fa-close"></i></button></td>' +
                 '</tr>'
   $('#item_body').append(itemRow);
 });
 
-//Removie product item
+//Remove product item
 $('.remove_item').on('click', function() {
-  // let last_item = $('#item_body tr').length;
+  let last_item = $('#item_body tr').length;
 
-  // if(last_item == 1) {
-  //   alert('Cannot remove');
-  // }
-  // else {
+  if(last_item == 1) {
+    alert('Cannot remove');
+  }
+  else {
     $(this).parent().parent().remove();
-    // console.log(last_item);
-  // }
+  }
   
 });

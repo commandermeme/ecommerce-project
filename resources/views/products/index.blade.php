@@ -42,15 +42,16 @@
                                                 <td class="d-none d-sm-table-cell">{{ $stock->stock }}</td>
                                                 <td class="d-none d-sm-table-cell">$0.00</td>
                                                 <td>
-                                                    <a class="btn btn-success" href="#">
+                                                    <a class="btn btn-warning" href="#">
                                                         <i class="icon-graph"></i>
                                                     </a>
-                                                    <a class="btn btn-info" href="#{{--/products/{{ $product->id }}/edit--}}">
+                                                    <a class="btn btn-info" href="/products/{{ $product->id }}/edit">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                     <a class="btn btn-danger" href="#">
                                                         <i class="fa fa-trash-o"></i>
                                                     </a>
+                                                    <a class="btn btn-success" href="#">Items</a>
                                                 </td>
                                             </tr>
                                         @endif    

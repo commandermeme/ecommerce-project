@@ -60,6 +60,19 @@
     <script src="{{ asset('dist/vendors/jquery-validation/js/jquery.validate.js') }}"></script>
     <script src="{{ asset('dist/js/validation.js') }}"></script>
 
+    <!--CDN-->
+    <script src="https://cdn.ckeditor.com/ckeditor5/15.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+                .create( document.querySelector( '#ck-editor' ) )
+                .then( editor => {
+                        console.log( editor );
+                } )
+                .catch( error => {
+                        console.error( error );
+                } );
+    </script>
+
 
 </body>
 </html>

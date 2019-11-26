@@ -121,7 +121,9 @@ class ProductsController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
-        return view('products.edit')->with('product', $product);
+        
+        $items = Item::where('prod_id', $product->id)->get();
+        return view('products.edit')->with('product', $product)->with('items', $items);
     }
 
     /**
@@ -134,9 +136,7 @@ class ProductsController extends Controller
     public function update(Request $request, $id)
     {
         //Update products
-
         $product = Product::find($id);
-        $product->user_id = auth()->user()->id;
         $product->title = $request->input('title');
         $product->price = $request->input('price');
         $product->currency = $request->input('currency');
@@ -144,20 +144,33 @@ class ProductsController extends Controller
         $product->notetocustomer = $request->input('notetocustomer');
         
         if($product->save()) {
-            $item_code = $request->input('code');
-        
-            foreach ($request->code as $key => $value) {
-                $item = Item::find($product->id);
-                $item->prod_id = $product->id;
-                $item->code = $item_code[$key];
-                $item->save();
-            }
+            
+
+            // $codes = $request->code;
+            // $code_id = Item::where('prod_id', $product->id)->get('id');
+
+
+            // $item_code = $request->code;
+            // $prod_id_item = $product->id;
+            // foreach ($request->code as $key => $value) {
+
+            // //     $items = $item_code[$key];
+                
+            //     $item = Item::where('prod_id', $prod_id_item)->update(['code' => $item_code[$key]]);
+               
+            //     return $item;
+            // }
+            // return $items;
+            // $item = Item::where('prod_id', $prod_id_item)->update([
+            //     'code' => $items
+            // ]);
+            // return  $item;
             
         }
         
         $items = $item->where('prod_id', $product->id)->count();
         
-        $stock = new Stock;
+        $stock = Stock::find($id);
         $stock->prod_id = $product->id;
         $stock->stock = $items;
         $stock->save();

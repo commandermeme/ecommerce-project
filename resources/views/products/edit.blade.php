@@ -50,7 +50,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for=""><strong>Description</strong></label>
-                                    <textarea class="form-control" name="description" cols="30" rows="10">{{ $product->description }}</textarea>
+                                    <textarea id="ck-editor" class="form-control" name="description" cols="30" rows="10">{{ $product->description }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -121,13 +121,14 @@
                                     </thead>
                                     <tbody id="item_body">
                                         
-                                            {{-- @foreach ($product as $product) --}}
-                                        <tr>
-                                                <td><input type="text" class="form-control" name="code[]" value="{{ $product->code }}"></td>
-                                                <td><button class="btn btn-danger remove_item"><i class="fa fa-close"></i></button></td>
-                                           
-                                        </tr>
-                                        {{-- @endforeach --}}
+                                        @foreach ($items as $item)
+                                            @if ($item->status == 1)
+                                                <tr>
+                                                    <td><input type="text" class="form-control" name="code[]" value="{{ $item->code }}"></td>
+                                                    <td><button type="button" class="btn btn-danger remove_item"><i class="fa fa-close"></i></button></td>
+                                                </tr>
+                                            @endif
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

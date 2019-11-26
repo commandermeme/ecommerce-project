@@ -48,7 +48,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for=""><strong>Description</strong></label>
-                                    <textarea class="form-control" name="description" cols="30" rows="10"></textarea>
+                                    <textarea id="ck-editor" class="form-control" name="description" cols="30" rows="10" placeholder="Description"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -97,15 +97,16 @@
                         <strong class="text-muted">Product Stock</strong>
                     </div>
                     <div class="card-body">
+                        <h5>Items</h5>
                         <div class="row">
-                            <div class="col-sm-12">
+                            {{-- <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="type"><strong>Type</strong></label>
                                     <select class="form-control" name="" id="type">
                                         <option value="">Serial/Code</option>
                                         <option value="">File</option>
                                     </select>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="col-sm-12 mt-2">
                                 <table class="table table-borderless">
