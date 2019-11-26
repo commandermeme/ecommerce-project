@@ -508,17 +508,17 @@ var brandBoxChart4 = new Chart($('#social-box-chart-4'), {
 //# sourceMappingURL=main.js.map
 
 //Add product item
-$('#add_item').on('click', function() {
+$('.add_item').on('click', function() {
   let itemRow = '<tr>' +
                   '<td><input type="text" class="form-control" name="code[]" value=""></td>' +
-                  '<td><button type="button" class="btn btn-danger remove_item"><i class="fa fa-close"></i></button></td>' +
-                '</tr>'
-  $('#item_body').append(itemRow);
+                  '<td><a class="btn btn-danger text-light remove_item"><i class="fa fa-close"></i></a></td>' +
+                '</tr>';
+  $('.item_body').append(itemRow);
 });
 
 //Remove product item
 $('.remove_item').on('click', function() {
-  let last_item = $('#item_body tr').length;
+  let last_item = $('.item_body tr').length;
 
   if(last_item == 1) {
     alert('Cannot remove');
@@ -528,3 +528,69 @@ $('.remove_item').on('click', function() {
   }
   
 });
+
+//add denomination
+// $('.add_denomination').on('click', function() {
+//   let denominationRow = '<div class="card">' +
+//                           '<div class="card-header border-0">' +
+//                               '<strong class="text-muted">Product Items</strong>' +
+//                               '<a class="pull-right btn btn-danger text-light remove_denomination"><i class="fa fa-close"></i></a>' +
+//                           '</div>' +
+//                           '<div class="col-md-3 mt-3">' +
+//                             '<div class="form-group">' +
+//                                 '<label for=""><strong>Price</strong></label>' +
+//                                 '<div class="input-group">' +
+//                                     '<input name="price[]" type="number" class="form-control" placeholder="Price">' +
+//                                     '<div class="input-group-prepend">' +
+//                                         '<select class="btn btn-primary" name="currency" id="">' +
+//                                             '<option value="USD">USD</option>' +
+//                                             '<option value="PHP">PHP</option>' +
+//                                             '<option value="CAD">CAD</option>' +
+//                                             '<option value="EUR">EUR</option>' +
+//                                             '<option value="JPY">JPY</option>' +
+//                                             '<option value="GBP">GBP</option>' +
+//                                             '<option value="ZAR">ZAR</option>' +
+//                                         '</select>' +
+//                                     '</div>' +
+//                                 '</div>' +
+//                             '</div>' +
+//                           '</div>' +
+//                           '<div class="card-body">' +
+//                               '<div class="row">' +
+//                                   '</div>' +
+//                                   '<div class="col-sm-12 mt-2">' +
+//                                       '<table class="table table-borderless">' +
+//                                           '<thead>' +
+//                                               '<tr>' +
+//                                                   '<th>Serial/Code</th>' +
+//                                                   '<th>' +
+//                                                       '<a class="btn btn-primary text-light add_item"><i class="fa fa-plus"></i></a>' +
+//                                                   '</th>' +
+//                                               '</tr>' +
+//                                           '</thead>' +
+//                                           '<tbody id="item_body">' +
+//                                               '<tr>' +
+//                                                   '<td><input type="text" class="form-control" name="code[]"></td>' +
+//                                                   '<td><a class="btn btn-danger remove_item text-light"><i class="fa fa-close"></i></a></td>' +
+//                                               '</tr>' +
+//                                           '</tbody>' +
+//                                       '</table>' +
+//                                   '</div>' +
+//                               '</div>' +
+//                           '</div>' +
+//                         '</div>';
+//   $('.denomination').append(denominationRow);
+// });
+
+// //remove denomination
+// $('.remove_denomination').on('click', function() {
+//   let last_item = $('.denomination card').length;
+
+//   if(last_item == 1) {
+//     alert('Cannot remove');
+//   }
+//   else {
+//     $(this).parent().parent().remove();
+//   }
+  
+// });

@@ -17,7 +17,7 @@
 									<input class="quantity" min="1" max="{{ $stock->stock }}" name="quantity" value="1" type="number">
 									<button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
 								</div>
-							<dd class="col">{{ $product->price .' '. $product->currency }}</dd>
+							<dd class="col">{{ $stock->price .' '. $stock->currency }}</dd>
 								<label class="checkbox"><input type="checkbox" />
 									<span class="success"></span>
 								</label>

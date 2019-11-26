@@ -17,6 +17,8 @@ class CreateStocksTable extends Migration
             $table->bigIncrements('id');
             $table->integer('prod_id');
             $table->integer('stock');
+            $table->string('price');
+            $table->string('currency');
             $table->timestamps();
         });
     }

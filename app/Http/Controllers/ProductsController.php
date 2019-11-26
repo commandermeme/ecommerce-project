@@ -51,11 +51,10 @@ class ProductsController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'price' => 'required',
             'description' => 'required',
             'prod_image' => 'image|nullable|max:1999',
         ]);
-            
+
         //Handle file upload
         if ($request->hasFile('prod_image')) {
             $filenameWithExt = $request->file('prod_image')->getClientOriginalName();
@@ -67,14 +66,11 @@ class ProductsController extends Controller
         } else {
             $fileNameToStore = 'noimage.jpg';
         }
-        
 
         //Create products
         $product = new Product;
         $product->user_id = auth()->user()->id;
         $product->title = $request->input('title');
-        $product->price = $request->input('price');
-        $product->currency = $request->input('currency');
         $product->description = $request->input('description');
         $product->notetocustomer = $request->input('notetocustomer');
         $product->prod_image = $fileNameToStore;
@@ -96,6 +92,8 @@ class ProductsController extends Controller
         $stock = new Stock;
         $stock->prod_id = $product->id;
         $stock->stock = $items;
+        $stock->price = $request->input('price');
+        $stock->currency = $request->input('currency');
         $stock->save();
         
         return redirect('/products');
@@ -109,7 +107,9 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        //
+        $products = Product::find($id);
+
+        return view('products.show')->with('products', $products);
     }
 
     /**
@@ -122,8 +122,7 @@ class ProductsController extends Controller
     {
         $product = Product::find($id);
         
-        $items = Item::where('prod_id', $product->id)->get();
-        return view('products.edit')->with('product', $product)->with('items', $items);
+        return view('products.edit')->with('product', $product);
     }
 
     /**
@@ -135,46 +134,26 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //Handle file upload
+        if ($request->hasFile('prod_image')) {
+            $filenameWithExt = $request->file('prod_image')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extention = $request->file('prod_image')->getClientOriginalExtension();
+            $fileNameToStore = $filename. '_' .time(). '.' .$extention;
+            $path = $request->file('prod_image')->storeAs('public/prod_images', $fileNameToStore);
+            
+        } else {
+            $fileNameToStore = 'noimage.jpg';
+        }
+
         //Update products
         $product = Product::find($id);
         $product->title = $request->input('title');
-        $product->price = $request->input('price');
-        $product->currency = $request->input('currency');
         $product->description = $request->input('description');
         $product->notetocustomer = $request->input('notetocustomer');
-        
-        if($product->save()) {
-            
+        $product->prod_image = $fileNameToStore;
+        $product->save();
 
-            // $codes = $request->code;
-            // $code_id = Item::where('prod_id', $product->id)->get('id');
-
-
-            // $item_code = $request->code;
-            // $prod_id_item = $product->id;
-            // foreach ($request->code as $key => $value) {
-
-            // //     $items = $item_code[$key];
-                
-            //     $item = Item::where('prod_id', $prod_id_item)->update(['code' => $item_code[$key]]);
-               
-            //     return $item;
-            // }
-            // return $items;
-            // $item = Item::where('prod_id', $prod_id_item)->update([
-            //     'code' => $items
-            // ]);
-            // return  $item;
-            
-        }
-        
-        $items = $item->where('prod_id', $product->id)->count();
-        
-        $stock = Stock::find($id);
-        $stock->prod_id = $product->id;
-        $stock->stock = $items;
-        $stock->save();
-        
         return redirect('/products');
     }
 
@@ -186,6 +165,14 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+
+        if($product->delete()) {
+            Item::where('prod_id', $product->id)->delete();
+            Stock::where('prod_id', $product->id)->delete();
+               
+        }
+
+        return redirect('/products');
     }
 }

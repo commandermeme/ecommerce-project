@@ -8,28 +8,22 @@
                 @csrf
                 <div class="card">
                     <div class="card-header border-0">
-                        {{-- <h5 class="text-muted">General Information</h5> --}}
                         <strong class="text-muted">General Information</strong>
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-9">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for=""><strong>Title</strong></label>
                                     <input id="title" name="title" type="text" class="form-control" placeholder="Title">
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            {{-- <div class="col-md-3">
                                 <div class="form-group">
                                     <label for=""><strong>Price</strong></label>
                                     <div class="input-group">
                                         <input name="price" type="number" class="form-control" placeholder="Price">
                                         <div class="input-group-prepend">
-                                            {{-- <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">USD<span class="caret"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="#" class="dropdown-item">PHP</a>
-                                                <a href="#" class="dropdown-item">BAR</a>
-                                            </div> --}}
                                             <select class="btn btn-primary" name="currency" id="">
                                                 <option value="USD">USD</option>
                                                 <option value="PHP">PHP</option>
@@ -42,7 +36,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
@@ -92,21 +86,13 @@
                     </div>
                 </div>
 
-                <div class="card">
+                {{-- <div class="card">
                     <div class="card-header border-0">
                         <strong class="text-muted">Product Stock</strong>
                     </div>
                     <div class="card-body">
                         <h5>Items</h5>
                         <div class="row">
-                            {{-- <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="type"><strong>Type</strong></label>
-                                    <select class="form-control" name="" id="type">
-                                        <option value="">Serial/Code</option>
-                                        <option value="">File</option>
-                                    </select>
-                                </div> --}}
                             </div>
                             <div class="col-sm-12 mt-2">
                                 <table class="table table-borderless">
@@ -128,7 +114,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="card">
                     <div class="card-header border-0">
@@ -136,15 +122,6 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class=" col-md-8">
-                                <div class="form-group">
-                                    <label for="layout"><strong>Layout</strong></label>
-                                    <select name="" id="layout" class="form-control">
-                                        <option value="">Regular</option>
-                                        <option value="">Custom</option>
-                                    </select>
-                                </div>
-                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="file-input"><strong>Image</strong> <small class="text-muted"><em>optional</em></small></label>
@@ -159,61 +136,57 @@
                                     <textarea class="form-control" name="notetocustomer" id="note" cols="30" rows="5"></textarea>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="d-block" for="custom"><strong>Custom Fields</strong> <small class="text-muted"><em>Optional</em></small></label>
-                                    <input id="custom" class="btn btn-secondary" type="button" value="Add Custom Field">
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="card">
                     <div class="card-header border-0">
-                        <strong class="text-muted">Miscellaneous</strong>
+                        <strong class="text-muted">Product Item</strong>
+                        {{-- <a class="pull-right btn btn-danger text-light remove_denomination"><i class="fa fa-close"></i></a> --}}
+                    </div>
+                    <div class="col-md-3 mt-3">
+                        <div class="form-group">
+                            <label for=""><strong>Price</strong></label>
+                            <div class="input-group">
+                                <input name="price" type="number" class="form-control" placeholder="Price">
+                                <div class="input-group-prepend">
+                                    <select class="btn btn-primary" name="currency" id="">
+                                        <option value="USD">USD</option>
+                                        <option value="PHP">PHP</option>
+                                        <option value="CAD">CAD</option>
+                                        <option value="EUR">EUR</option>
+                                        <option value="JPY">JPY</option>
+                                        <option value="GBP">GBP</option>
+                                        <option value="ZAR">ZAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="webhook"><strong>Webhook URL</strong> <small class="text-muted"><em>Optional</em></small></label>
-                                    <input type="text" id="webhook" class="form-control" placeholder="Webhool URL">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="crypto"><strong>Crypto Currency Confirmations</strong></label>
-                                    <input id="range_08" type="text" name="crypto">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="risk"><strong>Max Risk Level</strong></label>
-                                    <input id="range_03" type="text" name="risk">
-                                </div>
-                            </div>
-                            <div class="form-group form-check col ml-3">
-                                <input type="checkbox" class="form-check-input" id="paypal">
-                                <label class="form-check-label" for="paypal">Paypal <a href="#"><i class="fa fa-question-circle text-info"></i></a></label>
-                            </div>
-                            <div class="form-group form-check col ml-3">
-                                <input type="checkbox" class="form-check-input" id="paypal">
-                                <label class="form-check-label" for="paypal">Private <a href="#"><i class="fa fa-question-circle text-info"></i></a></label>
-                            </div>
-                            <div class="form-group form-check col ml-3">
-                                <input type="checkbox" class="form-check-input" id="paypal">
-                                <label class="form-check-label" for="paypal">Block VPNs/Proxies <a href="#"><i class="fa fa-question-circle text-info"></i></a></label>
-                            </div>
-                            <div class="form-group form-check col ml-3">
-                                <input type="checkbox" class="form-check-input" id="paypal">
-                                <label class="form-check-label" for="paypal">Paypal Email Delivery <a href="#"><i class="fa fa-question-circle text-info"></i></a></label>
+                            <div class="col-sm-12 mt-2">
+                                <table class="table table-borderless">
+                                    <thead>
+                                        <tr>
+                                            <th>Serial/Code</th>
+                                            <th>
+                                                <a class="btn btn-primary text-light add_item"><i class="fa fa-plus"></i></a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="item_body">
+                                        <tr>
+                                            <td><input type="text" class="form-control" name="code[]"></td>
+                                            <td><a class="btn btn-danger remove_item text-light"><i class="fa fa-close"></i></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <input class="btn btn-primary mb-4" type="submit" value="Save Product">
+                <input class="btn btn-primary mb-4" type="submit" value="Save">
             {!! Form::close() !!}   
         </div>
     </div>

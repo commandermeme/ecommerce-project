@@ -24,7 +24,7 @@
 									<div>
 										<dl class="row  d-flex justify-content-between align-items-center">
 											<dd class="col-sm-5"><strong>Stock:</strong> {{ $stock->stock }}</dd>
-											<dd class="col-sm-7"><strong>Price:</strong> {{ $product->price .' '. $product->currency}}</dd>
+											<dd class="col-sm-7"><strong>Price:</strong> {{ $stock->price .' '. $stock->currency}}</dd>
 										</dl>
 									</div>
 								</div>
