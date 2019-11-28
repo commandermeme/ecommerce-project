@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\User;
 use App\Stock;
+use App\Item;
+use App\Denomination;
 
 class StoresController extends Controller
 {
@@ -18,9 +20,10 @@ class StoresController extends Controller
     {
         $products = Product::all();
         $stocks = Stock::all();
+        $items = Item::all();
+        $denominiations = Denomination::all();
 
-
-        return view('stores.index')->with('products', $products)->with('stocks', $stocks);
+        return view('stores.index')->with('products', $products)->with('stocks', $stocks)->with('items', $items)->with('denominations', $denominiations);
     }
 
     /**
@@ -54,9 +57,9 @@ class StoresController extends Controller
     {
         
         $product =  Product::find($id);
-        $stock = Stock::find($id);
+        $stocks = Stock::all();
         
-        return view('stores.show')->with('product', $product)->with('stock', $stock);
+        return view('stores.show')->with('product', $product)->with('stocks', $stocks);
     }
 
     /**

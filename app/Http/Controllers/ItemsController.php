@@ -71,6 +71,7 @@ class ItemsController extends Controller
             $stock->stock = $items;
             $stock->price = $request->input('price');
             $stock->currency = $request->input('currency');
+            $stock->deno_name = $deno_name;
             $stock->save();
         }
 

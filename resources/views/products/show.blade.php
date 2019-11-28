@@ -22,7 +22,7 @@
                 <div class="card-body">
                     <div class="row no-gutters">
                         <div class="col">
-                            <img src="/storage/prod_images/{{ $product->prod_image }}" alt="No image found!">
+                            <img class="img-fluid" src="/storage/prod_images/{{ $product->prod_image }}" alt="No image found!">
                         </div>
                         <div class="col">
                             <p class="">
@@ -43,7 +43,12 @@
                     <div class="card">
                         <div class="card-header border-0">
                             <h4 class="d-inline">{{ $product->title .' worth '. $stock->price .' '. $stock->currency}}</h4>
-                            <h4 class="d- inline pull-right">Stock : {{ $stock->stock }}</h4>
+                            <p class="pull-right">
+                                    <a href="#" class="btn btn-primary"><i class="fa fa-plus"></i></a>
+                                    <a href="#" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                                    <a href="#" class="btn btn-primary"><i class="fa fa-close"></i></a>
+                            </p>
+                            <h5 class="">Stock : {{ $stock->stock }}</h5>
                         </div>
                         <div class="card-body">
                             <table class="table table-striped table-borderless datatable">

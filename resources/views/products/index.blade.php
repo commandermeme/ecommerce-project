@@ -27,7 +27,7 @@
                                     @foreach ($products as $product)
                                         @if ($product->id == $deno->prod_id)
                                             <tr>
-                                                <td><a class="" href="/stores" target="_blank" rel="noopener noreferrer">{{ $product->title }}</a></td>
+                                                <td><a class="text-decoration-none text-reset" href="/stores" target="_blank" rel="noopener noreferrer"><strong>{{ $product->title }}</strong></a></td>
                                                 <td>{{ $deno->denomination }}</td>
                                                 <td class="d-none d-sm-table-cell">
                                                     <span class="badge badge-success">Serial/Codes</span>
@@ -38,7 +38,7 @@
                                                         <i class="icon-graph"></i>
                                                     </a>
                                                     <a class="btn btn-secondary" href="/products/{{ $product->id }}">
-                                                        <i class="fa fa-eye"></i> Show
+                                                        <i class="fa fa-eye"></i>
                                                     </a>
                                                 </td>
                                             </tr>

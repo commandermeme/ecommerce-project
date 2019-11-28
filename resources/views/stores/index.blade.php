@@ -6,8 +6,8 @@
 	<div class="container">
 		<div class="row mt-5">
 			@foreach ($products as $product)
-				@foreach ($stocks as $stock)
-					@if ($product->id == $stock->prod_id)
+				
+					{{-- @if ($product->id == $stock->prod_id) --}}
 						<div class="col-xl-3 col-md-6 mb-4">
 							<div class="card border-0 shadow">
 								<div class="hovereffect">
@@ -22,16 +22,21 @@
 								<div class="card-body ">
 									<h6 class="card-title  mb-4"><strong>{{ $product->title }}</strong></h6>
 									<div>
-										<dl class="row  d-flex justify-content-between align-items-center">
-											<dd class="col-sm-5"><strong>Stock:</strong> {{ $stock->stock }}</dd>
-											<dd class="col-sm-7"><strong>Price:</strong> {{ $stock->price .' '. $stock->currency}}</dd>
-										</dl>
+										@foreach ($stocks as $stock)
+										@if ($stock->prod_id == $product->id)
+											
+											<dl class="row  d-flex justify-content-between align-items-center">
+												<dd class="col-sm-5"><strong>Stock:</strong> {{ $stock->stock }}</dd>
+												<dd class="col-sm-7"><strong>Price:</strong> {{ $stock->price .' '. $stock->currency}}</dd>
+											</dl>
+										@endif
+										@endforeach
 									</div>
 								</div>
 							</div>
 						</div>
-					@endif
-				@endforeach
+					{{-- @endif --}}
+				
 			@endforeach
 		</div>
 	</div>

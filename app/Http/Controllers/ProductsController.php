@@ -96,14 +96,17 @@ class ProductsController extends Controller
             
         }
         
-        $items = $item->where('deno_name', $deno_name)->count();
+        if ($item->save()) {
+            $items = $item->where('deno_name', $deno_name)->count();
         
-        $stock = new Stock;
-        $stock->prod_id = $product->id;
-        $stock->stock = $items;
-        $stock->price = $request->input('price');
-        $stock->currency = $request->input('currency');
-        $stock->save();
+            $stock = new Stock;
+            $stock->prod_id = $product->id;
+            $stock->stock = $items;
+            $stock->price = $request->input('price');
+            $stock->currency = $request->input('currency');
+            $stock->deno_name = $deno_name;
+            $stock->save();  
+        }
 
         if($stock->save()) {
             $deno = $stock->where('prod_id', $product->id)->count();
