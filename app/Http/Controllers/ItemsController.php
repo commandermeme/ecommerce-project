@@ -7,6 +7,7 @@ use App\Item;
 use App\Product;
 use App\Stock;
 use App\User;
+use App\Denomination;
 
 class ItemsController extends Controller
 {
@@ -42,7 +43,47 @@ class ItemsController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        $request->validate([
+            'price' => 'required',
+        ]);
+
+        $item_code = $request->input('code');
+        $prod_id = $request->input('prod_id');
+        $product = Product::find($prod_id);
+        $prod_name = $product->title;
+        $price = $request->price;
+        $currency  =$request->currency;
+        $deno_name = $prod_name .' '. $price . $currency;
+        
+        foreach ($request->code as $key => $value) {
+            $item = new Item;
+            $item->prod_id = $prod_id;
+            $item->code = $item_code[$key];
+            $item->deno_name = $deno_name;
+            $item->save();
+        }
+
+        if ($item->save()) {
+            $items = $item->where('deno_name', $deno_name)->count();
+        
+            $stock = new Stock;
+            $stock->prod_id = $prod_id;
+            $stock->stock = $items;
+            $stock->price = $request->input('price');
+            $stock->currency = $request->input('currency');
+            $stock->save();
+        }
+
+        if($stock->save()) {
+            $deno = $stock->where('prod_id', $prod_id)->count();
+
+            $denomination = Denomination::where('prod_id', $prod_id)->update([
+                'prod_id' => $prod_id,
+                'denomination' => $deno
+            ]);
+        }
+
+        return redirect('products/'. $prod_id);
     }
 
     /**

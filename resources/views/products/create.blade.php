@@ -18,25 +18,6 @@
                                     <input id="title" name="title" type="text" class="form-control" placeholder="Title">
                                 </div>
                             </div>
-                            {{-- <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for=""><strong>Price</strong></label>
-                                    <div class="input-group">
-                                        <input name="price" type="number" class="form-control" placeholder="Price">
-                                        <div class="input-group-prepend">
-                                            <select class="btn btn-primary" name="currency" id="">
-                                                <option value="USD">USD</option>
-                                                <option value="PHP">PHP</option>
-                                                <option value="CAD">CAD</option>
-                                                <option value="EUR">EUR</option>
-                                                <option value="JPY">JPY</option>
-                                                <option value="GBP">GBP</option>
-                                                <option value="ZAR">ZAR</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
                         </div>
                         <div class="row">
                             <div class="col-sm-12">

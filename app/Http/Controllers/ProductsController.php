@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Product;
 use App\Item;
 use App\Stock;
+use App\Denomination;
 
 class ProductsController extends Controller
 {
@@ -23,12 +25,14 @@ class ProductsController extends Controller
     public function index()
     {
         $products = Product::all();
-        $stocks = Stock::all();
+        $denominations = Denomination::all();
+        // $denomination = Denomination::where('prod_id', $prod_id)->latest()->first();
+        
 
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
 
-        return view('products.index')->with('products', $products)->with('stocks', $stocks)->with('products', $user->products);
+        return view('products.index')->with('products', $products)->with('denominations', $denominations)->with('products', $user->products);
     }
 
     /**
@@ -77,17 +81,22 @@ class ProductsController extends Controller
         
         if($product->save()) {
             $item_code = $request->input('code');
+            $prod_name = $request->title;
+            $price = $request->price;
+            $currency  =$request->currency;
+            $deno_name = $prod_name .' '. $price . $currency;
         
             foreach ($request->code as $key => $value) {
                 $item = new Item;
                 $item->prod_id = $product->id;
                 $item->code = $item_code[$key];
+                $item->deno_name = $deno_name;
                 $item->save();
             }
             
         }
         
-        $items = $item->where('prod_id', $product->id)->count();
+        $items = $item->where('deno_name', $deno_name)->count();
         
         $stock = new Stock;
         $stock->prod_id = $product->id;
@@ -95,6 +104,15 @@ class ProductsController extends Controller
         $stock->price = $request->input('price');
         $stock->currency = $request->input('currency');
         $stock->save();
+
+        if($stock->save()) {
+            $deno = $stock->where('prod_id', $product->id)->count();
+
+            $denomination = new Denomination;
+            $denomination->prod_id = $product->id;
+            $denomination->denomination = $deno;
+            $denomination->save();
+        }
         
         return redirect('/products');
     }
@@ -107,9 +125,11 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        $products = Product::find($id);
+        $product = Product::find($id);
+        $stocks = Stock::all();
+        $items = Item::all();
 
-        return view('products.show')->with('products', $products);
+        return view('products.show')->with('product', $product)->with('stocks', $stocks)->with('items', $items);
     }
 
     /**
@@ -154,7 +174,7 @@ class ProductsController extends Controller
         $product->prod_image = $fileNameToStore;
         $product->save();
 
-        return redirect('/products');
+        return redirect('products/'. $id);
     }
 
     /**
