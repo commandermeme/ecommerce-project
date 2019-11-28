@@ -15,7 +15,7 @@
                         <thead>
                             <tr>
                                 <th>Title</th>
-                                <th>Denomination</th>
+                                <th class="d-none d-sm-table-cell">Denomination</th>
                                 <th class="d-none d-sm-table-cell">Type</th>
                                 <th class="d-none d-sm-table-cell">Revenue</th>
                                 <th>Options</th>
@@ -28,7 +28,7 @@
                                         @if ($product->id == $deno->prod_id)
                                             <tr>
                                                 <td><a class="text-decoration-none text-reset" href="/stores" target="_blank" rel="noopener noreferrer"><strong>{{ $product->title }}</strong></a></td>
-                                                <td>{{ $deno->denomination }}</td>
+                                                <td class="d-none d-sm-table-cell">{{ $deno->denomination }}</td>
                                                 <td class="d-none d-sm-table-cell">
                                                     <span class="badge badge-success">Serial/Codes</span>
                                                 </td>
