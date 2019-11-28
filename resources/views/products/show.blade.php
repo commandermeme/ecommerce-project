@@ -21,10 +21,10 @@
                 </div>
                 <div class="card-body">
                     <div class="row no-gutters">
-                        <div class="col-sm-12">
+                        <div class="col-md-6">
                             <img class="img-fluid" src="/storage/prod_images/{{ $product->prod_image }}" alt="No image found!">
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-md-6">
                             <p class="">
                                 {!! $product->description !!}
                             </p>
