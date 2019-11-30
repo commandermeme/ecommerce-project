@@ -6,13 +6,7 @@
             <a href="{{ url('/products') }}" class="btn btn-secondary mt-2"><i class="fa fa-arrow-left"></i> Go back</a>
             <h1 class="my-4">{{ $product->title }}</h1>
 
-            {!! Form::open(['action' => ['ProductsController@destroy', $product->id], 'method' => 'POST', 'class' => 'd-inline', 'enctype' => 'multipart/form-data', 'id' => 'signupForm']) !!}
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-primary mb-1"><i class="fa fa-close"></i> Delete Product</button>
-            {!! Form::close() !!}
-
-            <a class="btn btn-primary mb-1" href="/stocks/{{ $product->id }}"><i class="fa fa-plus"></i> Add denomination</a>
+            <a class="btn btn-primary mb-1" href="/stocks/{{ $product->id }}"><i class="fa fa-plus"></i> Add Denomination</a>
 
             <div class="card mt-3">
                 <div class="card-header border-0">
@@ -37,7 +31,7 @@
 
             
             
-            @foreach ($stocks as $stock)
+            {{-- @foreach ($stocks as $stock)
                 @if ($stock->prod_id == $product->id)
                 
                     <div class="card">
@@ -78,7 +72,47 @@
                
             @endif
             
-            @endforeach
+            @endforeach --}}
+            
+            <div class="card">
+                <div class="card-header border-0">
+                    <h4>Items</h4>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped table-borderless datatable">
+                        <thead>
+                            <tr>
+                                <th>Denomination Name</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($stocks as $stock)
+                                @if ($stock->prod_id == $product->id)
+                                    <tr>
+                                        <td>{{ $stock->deno_name }}</td>
+                                        <td>{{ $stock->price .' '. $stock->currency}}</td>
+                                        <td>{{ $stock->stock }}</td>
+                                        <td>
+                                            <a href="/showStocks/{{ $stock->id }}" class="btn btn-primary">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            {!! Form::open(['action' => ['StocksController@destroy', $stock->id], 'method' => 'POST', 'class' => 'd-inline', 'enctype' => 'multipart/form-data', 'id' => 'signupForm']) !!}
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <button type="submit" class="btn btn-primary"><i class="fa fa-close"></i></button>
+                                            {!! Form::close() !!}
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

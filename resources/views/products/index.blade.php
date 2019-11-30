@@ -40,6 +40,11 @@
                                                     <a class="btn btn-secondary" href="/products/{{ $product->id }}">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
+                                                    {!! Form::open(['action' => ['ProductsController@destroy', $product->id], 'method' => 'POST', 'class' => 'd-inline', 'enctype' => 'multipart/form-data', 'id' => 'signupForm']) !!}
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-primary mb-1"><i class="fa fa-close"></i></button>
+                                                    {!! Form::close() !!}
                                                 </td>
                                             </tr>
                                         @endif    

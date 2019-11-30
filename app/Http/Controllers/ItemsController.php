@@ -45,6 +45,8 @@ class ItemsController extends Controller
     {
         $request->validate([
             'price' => 'required',
+            'code' => 'required',
+            'code.*' => 'required',
         ]);
 
         $item_code = $request->input('code');
@@ -106,7 +108,9 @@ class ItemsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Item::find($id);
+
+        return view('items.edit')->with('item', $item);
     }
 
     /**
@@ -118,7 +122,12 @@ class ItemsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $item = Item::find($id);
+
+        $item->code = $request->code;
+        $item->save();
+
+        return redirect('products/' .$item->prod_id);
     }
 
     /**
@@ -129,6 +138,61 @@ class ItemsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Item::find($id);
+
+        if($item->delete()) {
+            $items = $item->where('deno_name', $item->deno_name)->count();
+
+            $stock = Stock::where('deno_name', $item->deno_name)->update([
+                'stock' => $items
+            ]);
+        }
+
+        return redirect('products/' .$item->prod_id);
+    }
+
+    public function createItem($id)
+    {
+        $stock = Stock::find($id);
+        $items = Item::all();
+
+        return view('items.createItem')->with('item', $items)->with('stock', $stock);
+    }
+
+    public function storeItem(Request $request)
+    {
+        
+        $request->validate([
+            'code' => 'required',
+            'code.*' => 'required',
+        ]);
+
+        $item_code = $request->input('code');
+        $prod_id = $request->prod_id;
+        $deno_name = $request->deno_name;
+        // $price = $request->price;
+        // $currency = $request->currency;
+        $stock_id = $request->stock_id;
+        
+        foreach ($request->code as $key => $value) {
+            $item = new Item;
+            $item->prod_id = $prod_id;
+            $item->code = $item_code[$key];
+            $item->deno_name = $deno_name;
+            $item->save();
+        }
+
+        if ($item->save()) {
+            $items = $item->where('deno_name', $deno_name)->count();
+
+            $stock = Stock::where('deno_name', $deno_name)->update([
+                // 'prod_id' => $prod_id,
+                'stock' => $items,
+                // 'price' => $price,
+                // 'deno_name' => $deno_name
+            ]);
+        }
+
+        return redirect('showStocks/'. $stock_id);
     }
 }

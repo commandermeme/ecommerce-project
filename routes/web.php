@@ -21,6 +21,9 @@ Route::get('/dashboard', 'DashboardController@index');
 Route::get('/orders', 'OrdersController@index');
 Route::get('/analytics', 'AnalyticsController@index');
 Route::get('/queries', 'QueriesController@index');
+Route::get('/showStocks/{id}', 'StocksController@showStocks');
+Route::get('/items/createItem/{id}', 'ItemsController@createItem');
+Route::post('/items/createItem', 'ItemsController@storeItem');
 
 Route::resource('products', 'ProductsController');
 Route::resource('coupons', 'CouponsController');

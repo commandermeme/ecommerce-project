@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Stock;
+use App\Item;
+use App\Denomination;
 
 class StocksController extends Controller
 {
@@ -15,7 +17,7 @@ class StocksController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -61,7 +63,7 @@ class StocksController extends Controller
      */
     public function edit($id)
     {
-        //
+        return $id;
     }
 
     /**
@@ -84,6 +86,26 @@ class StocksController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $stock = Stock::find($id);
+        
+        $prod_id = $stock->prod_id;
+
+        if($stock->delete()) {
+            $deno = Stock::where('prod_id', $stock->prod_id)->count();
+            
+            Item::where('deno_name', $stock->deno_name)->delete();
+            Denomination::where('prod_id', $stock->prod_id)->update(['denomination' => $deno]);
+        }
+
+        return redirect('products/' .$prod_id);
+    }
+
+    public function showStocks($id)
+    {
+
+        $stock = Stock::find($id);
+        $items = Item::all();
+        
+        return view('stocks.show')->with('stock', $stock)->with('items', $items);
     }
 }

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="animated fadeIn">
-                <a href="/products/{{ $product->id }}" class="btn btn-secondary mt-2"><i class="fa fa-arrow-left"></i> Go back</a>
+            <a href="/products/{{ $product->id }}" class="btn btn-secondary mt-2"><i class="fa fa-arrow-left"></i> Go back</a>
             <h2 class="my-4">Add Denomination</h2>
             {!! Form::open(['action' => 'ItemsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'id' => 'signupForm']) !!}
                 @csrf

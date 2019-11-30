@@ -193,7 +193,7 @@ class ProductsController extends Controller
         if($product->delete()) {
             Item::where('prod_id', $product->id)->delete();
             Stock::where('prod_id', $product->id)->delete();
-               
+            Denomination::where('prod_id', $product->id)->delete();
         }
 
         return redirect('/products');
