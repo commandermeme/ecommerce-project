@@ -23,6 +23,9 @@ Route::get('/analytics', 'AnalyticsController@index');
 Route::get('/queries', 'QueriesController@index');
 Route::get('/showStocks/{id}', 'StocksController@showStocks');
 Route::get('/items/createItem/{id}', 'ItemsController@createItem');
+Route::get('/user/{username}', 'StoresController@indexClient');
+Route::get('/user/{id}/{username}', 'StoresController@showClient');
+
 Route::post('/items/createItem', 'ItemsController@storeItem');
 
 Route::resource('products', 'ProductsController');
