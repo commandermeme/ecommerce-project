@@ -52,7 +52,7 @@
 						<hr>
 						<div class="row">
 							<div class="col-md-3 mb-2">
-								<h5 class="d-inline">Stock: <span class="badge badge-primary mb-1">{{ $stock->stock }}</span></h5>
+								<h5 class="d-inline">Quantity: <span class="badge badge-primary mb-1">{{ $stock->stock }}</span></h5>
 								
 							</div>
 							<div class="col-md-5 mb-2">
