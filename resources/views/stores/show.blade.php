@@ -66,6 +66,8 @@
 								<button class="btn btn-danger"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
 							</div>
 						</div>
+						<hr>
+						<p class="lead"><strong>Total:</strong> </p>
 					</div>
 				</div> 
 			</div>
