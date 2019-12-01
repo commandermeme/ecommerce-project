@@ -7,6 +7,7 @@
             <h1 class="my-4">{{ $stock->deno_name }}</h1>
 
             <a class="btn btn-primary mb-1" href="/items/createItem/{{ $stock->id }}"><i class="fa fa-plus"></i> Add Item</a>
+            <a class="btn btn-primary mb-1" href="/stocks/{{ $stock->id }}/edit"><i class="fa fa-edit"></i> Edit Price</a>
 
             <div class="card mt-3">
                 <div class="card-header border-0">

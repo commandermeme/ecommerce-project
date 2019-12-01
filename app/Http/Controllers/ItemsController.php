@@ -75,6 +75,8 @@ class ItemsController extends Controller
             $stock->currency = $request->input('currency');
             $stock->deno_name = $deno_name;
             $stock->save();
+
+            $item_stock_id = Item::where('deno_name', $stock->deno_name)->update(['stock_id' => $stock->id]);
         }
 
         if($stock->save()) {
@@ -109,8 +111,9 @@ class ItemsController extends Controller
     public function edit($id)
     {
         $item = Item::find($id);
+        $stock = Stock::where('deno_name', $item->deno_name)->get();
 
-        return view('items.edit')->with('item', $item);
+        return view('items.edit')->with('item', $item)->with('stock', $stock);
     }
 
     /**
@@ -123,11 +126,13 @@ class ItemsController extends Controller
     public function update(Request $request, $id)
     {
         $item = Item::find($id);
+        $stock = Stock::where('deno_name', $item->deno_name)->get();
+        $stock_id = $stock[0]->id;
 
         $item->code = $request->code;
         $item->save();
 
-        return redirect('products/' .$item->prod_id);
+        return redirect('showStocks/' .$stock_id);
     }
 
     /**
@@ -139,6 +144,7 @@ class ItemsController extends Controller
     public function destroy($id)
     {
         $item = Item::find($id);
+        $stock_id = Stock::where('deno_name', $item->deno_name)->get();
 
         if($item->delete()) {
             $items = $item->where('deno_name', $item->deno_name)->count();
@@ -148,7 +154,7 @@ class ItemsController extends Controller
             ]);
         }
 
-        return redirect('products/' .$item->prod_id);
+        return redirect('showStocks/' .$stock_id[0]->id);
     }
 
     public function createItem($id)

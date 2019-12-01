@@ -63,7 +63,9 @@ class StocksController extends Controller
      */
     public function edit($id)
     {
-        return $id;
+        $stock = Stock::find($id);
+
+        return view('stocks.edit')->with('stock', $stock);
     }
 
     /**
@@ -75,7 +77,22 @@ class StocksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $stock = Stock::find($id);
+        $product = Product::where('id', $stock->prod_id)->get();
+        $product_title = $product[0]->title;
+        $deno_name = $product_title .' '. $request->price . $request->currency;
+
+        
+        $stock->price = $request->price;
+        $stock->currency = $request->currency;
+        $stock->deno_name = $deno_name;
+        $stock->save();
+
+        if ($stock->save()) {
+            Item::where('stock_id', $stock->id)->update(['deno_name' => $stock->deno_name]);
+        }
+
+        return redirect('showStocks/' .$stock->id);
     }
 
     /**

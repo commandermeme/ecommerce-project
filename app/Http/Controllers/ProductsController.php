@@ -106,6 +106,9 @@ class ProductsController extends Controller
             $stock->currency = $request->input('currency');
             $stock->deno_name = $deno_name;
             $stock->save();  
+
+            $item_stock_id = Item::where('deno_name', $stock->deno_name)->update(['stock_id' => $stock->id]);
+
         }
 
         if($stock->save()) {
