@@ -11,27 +11,21 @@
                             <tr>
                                 <th>Title</th>
                                 <th>Code</th>
-                                <th>Price</th>
                                 <th>Status</th>
-                                <th>Options</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($products as $product)
-                                @foreach ($stocks as $stock)
-                                    @foreach ($items as $item)
-                                        @if ($item->prod_id == $product->id)
-                                            @if ($stock->prod_id == $product->id)
-                                                <tr>
-                                                    <td>{{ $product->title }}</td>
-                                                    <td>{{ $item->code }}</td>
-                                                    <td>{{ $stock->price }}</td>
-                                                    <td>{{ $item->status }}</td>
-                                                    <td></td>
-                                                </tr>
-                                            @endif
-                                        @endif
-                                    @endforeach
+
+                            @foreach ($items as $item)
+                                @foreach ($products as $product)
+                                    @if ($item->prod_id  == $product->id)
+                                        <tr>
+                                            <td>{{ $item->deno_name }}</td>
+                                            <td>{{ $item->code }}</td>
+                                            <td>{{ $item->status }}</td>
+                                        </tr>  
+                                    @endif
+                                    
                                 @endforeach
                             @endforeach
                         </tbody>

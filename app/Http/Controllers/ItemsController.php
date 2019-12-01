@@ -11,6 +11,10 @@ use App\Denomination;
 
 class ItemsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -20,9 +24,10 @@ class ItemsController extends Controller
     {
         $items = Item::all();
         $products = Product::all();
-        $stocks = Stock::all();
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
 
-        return view('items.index')->with('items', $items)->with('products', $products)->with('stocks', $stocks);
+        return view('items.index')->with('items', $items)->with('products', $user->products);
     }
 
     /**
