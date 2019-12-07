@@ -178,12 +178,12 @@
 
                                 <div class="form-group">
                                     <label for="code"><strong>Serial/Code</strong></label>
-                                    <textarea class="form-control" name="code" id="code" cols="30" rows="8"></textarea>
+                                    <textarea class="form-control" name="code" id="code" cols="30" rows="8" placeholder="Utilize the stock separator set below to determine and control stock. By default, a new line will separate the stock."></textarea>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="separator"><strong>Separate by</strong></label>
+                                    <label for="separator"><strong>Separator</strong></label>
                                     <select name="separator" id="separator" class="form-control">
                                         <option value="line">New Line</option>
                                         <option value="comma">Comma</option>
@@ -198,3 +198,4 @@
         </div>
     </div>
 @endsection
+ 

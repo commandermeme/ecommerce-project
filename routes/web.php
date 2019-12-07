@@ -35,6 +35,7 @@ Route::resource('user_pages', 'UserPagesController');
 Route::resource('stores', 'StoresController');
 Route::resource('items', 'ItemsController');
 Route::resource('stocks', 'StocksController');
+Route::resource('cart', 'CartsController');
 
 Auth::routes(['verify' => true]);
 
