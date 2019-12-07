@@ -508,26 +508,38 @@ var brandBoxChart4 = new Chart($('#social-box-chart-4'), {
 //# sourceMappingURL=main.js.map
 
 //Add product item
-$('.add_item').on('click', function() {
-  let itemRow = '<tr>' +
-                  '<td><input type="text" class="form-control" name="code[]" value=""></td>' +
-                  '<td><a class="btn btn-danger text-light remove_item"><i class="fa fa-close"></i></a></td>' +
-                '</tr>';
-  $('.item_body').append(itemRow);
-});
+// $('.add_item').on('click', function() {
+//   let itemRow = '<tr>' +
+//                   '<td><input type="text" class="form-control" name="code[]" value=""></td>' +
+//                   '<td><a class="btn btn-danger text-light remove_item"><i class="fa fa-close"></i></a></td>' +
+//                 '</tr>';
+//   $('.item_body').append(itemRow);
+// });
 
 //Remove product item
-$('.remove_item').on('click', function() {
-  let last_item = $('.item_body tr').length;
+// $('.remove_item').on('click', function() {
+//   let last_item = $('.item_body tr').length;
 
-  if(last_item == 1) {
-    alert('Cannot remove');
-  }
-  else {
-    $(this).parent().parent().remove();
-  }
+//   if(last_item == 1) {
+//     alert('Cannot remove');
+//   }
+//   else {
+//     $(this).parent().parent().remove();
+//   }
   
-});
+// });
+
+$(document).ready(function(){  
+  var i=1;  
+  $('#add').click(function(){  
+       i++;  
+       $('#dynamic_field').append('<tr id="row'+i+'"><td ><input type="text" name="code[]" class="form-control " /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove"><i class="fa fa-close"></i></button></td></tr>');  
+  });  
+  $(document).on('click', '.btn_remove', function(){  
+       var button_id = $(this).attr("id");   
+       $('#row'+button_id+'').remove();  
+  });  
+});  
 
 //add denomination
 // $('.add_denomination').on('click', function() {

@@ -58,7 +58,7 @@
 							<div class="col-md-5 mb-2">
 								<div class="def-number-input number-input safari_only mr-5">
 									<button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
-									<input class="quantity" min="1" max="{{ $stock->stock }}" name="stock[]" value="1" type="number">
+									<input class="quantity" min="1" max="{{ $stock->stock }}" name="stock" value="1" type="number">
 									<button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
 								</div>
 							</div>

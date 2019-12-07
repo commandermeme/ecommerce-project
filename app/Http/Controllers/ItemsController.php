@@ -55,6 +55,13 @@ class ItemsController extends Controller
         ]);
 
         $item_code = $request->input('code');
+        if($request->separator == 'comma'){
+            $coded = explode(',', preg_replace('/(\r|\n)/', '', $item_code));
+        }
+        elseif($request->separator == 'line') {
+            $coded = explode(PHP_EOL, $item_code);
+        }
+
         $prod_id = $request->input('prod_id');
         $product = Product::find($prod_id);
         $prod_name = $product->title;
@@ -62,10 +69,10 @@ class ItemsController extends Controller
         $currency  =$request->currency;
         $deno_name = $prod_name .' '. $price . $currency;
         
-        foreach ($request->code as $key => $value) {
+        foreach ($coded as $key => $value) {
             $item = new Item;
             $item->prod_id = $prod_id;
-            $item->code = $item_code[$key];
+            $item->code = $coded[$key];
             $item->deno_name = $deno_name;
             $item->save();
         }
@@ -179,16 +186,23 @@ class ItemsController extends Controller
         ]);
 
         $item_code = $request->input('code');
+        if($request->separator == 'comma'){
+            $coded = explode(',', preg_replace('/(\r|\n)/', '', $item_code));
+        }
+        elseif($request->separator == 'line') {
+            $coded = explode(PHP_EOL, $item_code);
+        }
+
         $prod_id = $request->prod_id;
         $deno_name = $request->deno_name;
         // $price = $request->price;
         // $currency = $request->currency;
         $stock_id = $request->stock_id;
         
-        foreach ($request->code as $key => $value) {
+        foreach ($coded as $key => $value) {
             $item = new Item;
             $item->prod_id = $prod_id;
-            $item->code = $item_code[$key];
+            $item->code = $coded[$key];
             $item->deno_name = $deno_name;
             $item->save();
         }

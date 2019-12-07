@@ -17,8 +17,8 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->string('title');
-            $table->string('description');
-            $table->string('notetocustomer');
+            $table->longText('description');
+            $table->text('notetocustomer');
             $table->timestamps();
         });
     }

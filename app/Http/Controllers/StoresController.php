@@ -63,6 +63,8 @@ class StoresController extends Controller
         $stock = Stock::find($id);
         $product = Product::where('id', $stock->prod_id)->get();
         $prod_info = $product[0];
+        $total_price = $stock->price;
+
         
         return view('stores.show')->with('stock', $stock)->with('prod_info', $prod_info);
     }

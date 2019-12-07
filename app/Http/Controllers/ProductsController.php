@@ -81,15 +81,22 @@ class ProductsController extends Controller
         
         if($product->save()) {
             $item_code = $request->input('code');
+            if($request->separator == 'comma'){
+                $coded = explode(',', preg_replace('/(\r|\n)/', '', $item_code));
+            }
+            elseif($request->separator == 'line') {
+                $coded = explode(PHP_EOL, $item_code);
+            }
+
             $prod_name = $request->title;
             $price = $request->price;
             $currency  =$request->currency;
             $deno_name = $prod_name .' '. $price . $currency;
         
-            foreach ($request->code as $key => $value) {
+            foreach ($coded as $key => $value) {
                 $item = new Item;
                 $item->prod_id = $product->id;
-                $item->code = $item_code[$key];
+                $item->code = $coded[$key];
                 $item->deno_name = $deno_name;
                 $item->save();
             }

@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-12 mt-2">
-                                <table class="table table-borderless">
+                                {{-- <table class="table table-borderless">
                                     <thead>
                                         <tr>
                                             <th>Serial/Code</th>
@@ -33,7 +33,31 @@
                                             <td><a class="btn btn-danger remove_item text-light"><i class="fa fa-close"></i></a></td>
                                         </tr>
                                     </tbody>
-                                </table>
+                                </table> --}}
+                                {{-- <table class="table table-borderless" id="dynamic_field">  
+                                    <thead>
+                                        <tr>
+                                            <th>Serial/Code</th>
+                                        </tr>
+                                    </thead>
+                                    <tr>  
+                                        <td><input type="text" name="code[]"  class="form-control name_list" /></td>  
+                                        <td><button type="button" name="add" id="add" class="btn btn-success"><i class="fa fa-plus"></i></button></td>  
+                                    </tr>  
+                                </table> --}}
+                                <div class="form-group">
+                                    <label for="code"><strong>Serial/Code</strong></label>
+                                    <textarea class="form-control" name="code" id="code" cols="30" rows="8"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="separator"><strong>Separate by</strong></label>
+                                    <select name="separator" id="separator" class="form-control">
+                                        <option value="line">New Line</option>
+                                        <option value="comma">Comma</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
