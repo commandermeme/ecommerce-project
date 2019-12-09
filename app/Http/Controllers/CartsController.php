@@ -3,6 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Cart;
+use App\User;
+use App\Product;
+use App\Item;
+use App\Stock;
+use App\Denomination;
+use Session;
 
 class CartsController extends Controller
 {
@@ -13,7 +20,9 @@ class CartsController extends Controller
      */
     public function index()
     {
-        return view('cart.index');
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        return view('cart.index')->with('stocks', $cart->items)->with('totalPrice', $cart->totalPrice);
     }
 
     /**
@@ -80,5 +89,18 @@ class CartsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function addToCart(Request $request, $id)
+    {
+        $stock = Stock::find($id);
+        
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->add($stock, $stock->id);
+
+        $request->session()->put('cart', $cart);
+         
+        return redirect('/stores');
     }
 }

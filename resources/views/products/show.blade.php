@@ -92,7 +92,7 @@
                             @foreach ($stocks as $stock)
                                 @if ($stock->prod_id == $product->id)
                                     <tr>
-                                        <td>{{ $stock->deno_name }}</td>
+                                        <td>{{ $product->title .' '. $stock->original_price .' '. $stock->original_currency }}</td>
                                         <td>{{ $stock->price .' '. $stock->currency}}</td>
                                         <td>{{ $stock->stock }}</td>
                                         <td>

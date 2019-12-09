@@ -53,6 +53,7 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
         $request->validate([
             'title' => 'required',
             'description' => 'required',
@@ -111,6 +112,8 @@ class ProductsController extends Controller
             $stock->stock = $items;
             $stock->price = $request->input('price');
             $stock->currency = $request->input('currency');
+            $stock->original_price = $request->input('original_price');
+            $stock->original_currency = $request->input('original_currency');
             $stock->deno_name = $deno_name;
             $stock->save();  
 

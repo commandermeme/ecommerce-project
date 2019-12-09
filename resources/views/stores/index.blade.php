@@ -51,7 +51,7 @@
 						@foreach ($stocks as $stock)
 							@if ($stock->prod_id == $product->id)
 								<p class="card-text"> 
-									<span class="lead"><strong>Price: </strong>{{ $stock->price .' '. $stock->currency}}</span>
+									<span class="lead"><small><s>{{$stock->original_price .' '. $stock->original_currency }}</s></small> | <strong>{{ $stock->price .' '. $stock->currency }}</strong></span>
 									<span class="badge badge-pill badge-primary">{{ $stock->stock }}</span> 
 									<a href="stores/{{$stock->id}}" class="pull-right btn btn-outline-primary">
 										<i class="fa fa-shopping-cart"></i>

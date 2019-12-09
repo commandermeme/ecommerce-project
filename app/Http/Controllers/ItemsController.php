@@ -85,6 +85,8 @@ class ItemsController extends Controller
             $stock->stock = $items;
             $stock->price = $request->input('price');
             $stock->currency = $request->input('currency');
+            $stock->original_price = $request->input('original_price');
+            $stock->original_currency = $request->input('original_currency');
             $stock->deno_name = $deno_name;
             $stock->save();
 
@@ -124,8 +126,12 @@ class ItemsController extends Controller
     {
         $item = Item::find($id);
         $stock = Stock::where('deno_name', $item->deno_name)->get();
+        $product = Product::where('id', $item->prod_id)->get();
+        $prod_id = $product[0];
+        $stock_id = $stock[0];
+        // return $stock_id;
 
-        return view('items.edit')->with('item', $item)->with('stock', $stock);
+        return view('items.edit')->with('item', $item)->with('stock_id', $stock_id)->with('prod_id', $prod_id);
     }
 
     /**

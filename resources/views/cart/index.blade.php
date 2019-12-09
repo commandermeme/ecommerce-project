@@ -9,6 +9,7 @@
                 <div class="card-header"><b>Package 1 of 1</b> </div>
                 <div class="card-body">
                   <form class="form-horizontal" action="" method="post">
+                    @if (Session::has('cart'))
                         <div class="card-body">
                             <table class="table table-borderless table-responsive-sm">
                                 <thead>
@@ -20,16 +21,46 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                    <td>Jollibee</td>
-                                    <td>100</td>
-                                    <td>2</td>
-                                    <td>200</td>                             
-                                    <td><button type="button" name="add" id="add" class="btn btn-danger">Remove</button></td>  
-                                    </tr>
+                                    @foreach ($stocks as $stock)
+                                      <tr>
+                                        
+                                          <td>Jollibee</td>
+                                          <td>{{ $stock['price'] }}</td>
+                                          <td>2</td>
+                                          <td>200</td>                             
+                                          <td><button type="button" name="add" id="add" class="btn btn-danger">Remove</button></td> 
+                                        
+                                      </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
+                    @else
+                    <div class="card-body">
+                        <table class="table table-borderless table-responsive-sm">
+                            <thead>
+                                <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                  <tr>
+                                    
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>                             
+                                      <td></td> 
+                                    
+                                  </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    @endif
+                        
                   </form>
                 </div>
                 <div class="card-footer">
@@ -45,23 +76,14 @@
                   <form class="form-horizontal" action="" method="post">
                    <h5>Order Summary</h5>
 
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-md-8 mt-2">
                             <p class="">Subtotal(2 Items)</p>
                         </div>
                         <div class="col-md-4 mt-2">
-                            <p>$200.00</p>
+                            <p></p>
                         </div>
-                    </div>
-
-                    <div class=" row">
-                        <div class="col-md-8 mt-0">
-                            <p class="">Shipping Fee</p>
-                        </div>
-                        <div class="col-md-4 mt-0">
-                            <p>$50.00</p>
-                        </div>
-                    </div>
+                    </div> --}}
 
                     <div class=" row mt-2">
                         <div class="col-md-8 mt-0">
@@ -69,7 +91,7 @@
                         </div>
                         
                         <div class="col-md-4 mt-0">
-                            <p>$250.00</p>
+                            <p>{{ $totalPrice }}</p>
                         </div>
                     </div>
                     
@@ -82,4 +104,17 @@
               </div>
             </div>
           </div>
+          {{-- @if (Session::has('cart'))
+              <div class="row">
+                <div class="col">
+                  <ul class="list-group">
+                    @foreach ($stocks as $stock)
+                        <li class="list-group-item">
+                          <h6>{{ $stock['price'] }}</h6>
+                        </li>
+                    @endforeach
+                  </ul>
+                </div>
+              </div>
+          @endif --}}
 @endsection

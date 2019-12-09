@@ -12,10 +12,10 @@
             </form>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="{{ route('cart.index') }}" class="nav-link">Shopping Cart</a>
+                    <a href="{{ route('cart.index') }}" class="nav-link">Shopping Cart <span class="badge">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ route('stores.index') }}">Home <span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="animated fadeIn">
             <a href="/products/{{ $stock->prod_id }}" class="btn btn-secondary mt-2"><i class="fa fa-arrow-left"></i> Go back</a>
-            <h1 class="my-4">{{ $stock->deno_name }}</h1>
+            <h1 class="my-4">{{ $prod_id->title .' '. $stock->original_price .' '. $stock->original_currency}}</h1>
 
             <a class="btn btn-primary mb-1" href="/items/createItem/{{ $stock->id }}"><i class="fa fa-plus"></i> Add Item</a>
             <a class="btn btn-primary mb-1" href="/stocks/{{ $stock->id }}/edit"><i class="fa fa-edit"></i> Edit Price</a>

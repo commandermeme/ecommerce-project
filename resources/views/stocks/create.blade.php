@@ -16,6 +16,23 @@
                     <div class="col-md-3 mt-3">
                         <div class="form-group">
                             <label for=""><strong>Price</strong></label>
+                            <div class="form-group">
+                            <label for=""><strong>Original Price</strong></label>
+                                <div class="input-group">
+                                    <input name="original_price" type="number" class="form-control" placeholder="Original Price">
+                                    <div class="input-group-prepend">
+                                        <select class="btn btn-primary" name="original_currency" id="">
+                                            <option value="USD">USD</option>
+                                            <option value="PHP">PHP</option>
+                                            <option value="CAD">CAD</option>
+                                            <option value="EUR">EUR</option>
+                                            <option value="JPY">JPY</option>
+                                            <option value="GBP">GBP</option>
+                                            <option value="ZAR">ZAR</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="input-group">
                                 <input name="price" type="number" class="form-control" placeholder="Price">
                                 <div class="input-group-prepend">

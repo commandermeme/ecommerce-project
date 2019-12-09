@@ -46,7 +46,7 @@
 				</div>
 				<div class="col-md-8">
 					<div class="card-body mx-3">
-						<h1 class="card-title">{{ $prod_info->title }}</h1>
+						<h1 class="card-title">{{ $prod_info->title }} {{ $stock->original_price .' '. $stock->original_currency}}</h1>
 						<p class="card-text">{!! $prod_info->description !!}</p>
 						<p class="lead"><strong>Price:</strong> {{ $stock->price .' '. $stock->currency }}</p>
 						<hr>
@@ -63,11 +63,9 @@
 								</div>
 							</div>
 							<div class="col-md-4 mb-2">
-								<button class="btn btn-danger"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+								<a href="{{ route('cart.addToCart', ['id' => $stock->id]) }}" class="btn btn-danger"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
 							</div>
 						</div>
-						<hr>
-						<p class="lead"><strong>Total:</strong> </p>
 					</div>
 				</div> 
 			</div>

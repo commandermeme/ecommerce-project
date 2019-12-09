@@ -3,8 +3,8 @@
 @section('content')
     <div class="container-fluid">
         <div class="animated fadeIn">
-            <a href="/showStocks/{{ $stock[0]->id }}" class="btn btn-secondary mt-2"><i class="fa fa-arrow-left"></i> Go back</a>
-            <h1 class="my-4">{{ $item->deno_name }}</h1>
+            <a href="/showStocks/{{ $stock_id->id }}" class="btn btn-secondary mt-2"><i class="fa fa-arrow-left"></i> Go back</a>
+            <h1 class="my-4">{{ $prod_id->title .' '. $stock_id->original_price .' '. $stock_id->original_currency}}</h1>
 
             {!! Form::open(['action' => ['ItemsController@update', $item->id], 'method' => 'POST', 'class' => 'd-inline', 'enctype' => 'multipart/form-data', 'id' => 'signupForm']) !!}
                 @csrf

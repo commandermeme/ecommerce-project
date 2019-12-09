@@ -125,8 +125,10 @@ class StocksController extends Controller
     {
 
         $stock = Stock::find($id);
+        $product = Product::where('id', $stock->prod_id)->get();
+        $prod_id = $product[0];
         $items = Item::all();
         
-        return view('stocks.show')->with('stock', $stock)->with('items', $items);
+        return view('stocks.show')->with('stock', $stock)->with('items', $items)->with('prod_id', $prod_id);
     }
 }
