@@ -60,13 +60,13 @@ class StoresController extends Controller
     {
         
         // $product =  Product::find($id);
-        $stock = Stock::find($id);
-        $product = Product::where('id', $stock->prod_id)->get();
-        $prod_info = $product[0];
-        $total_price = $stock->price;
+        $product = Product::find($id);
+        $stock = Stock::where('prod_id', $product->id)->get();
+        $stocks = $stock->all();
+
 
         
-        return view('stores.show')->with('stock', $stock)->with('prod_info', $prod_info);
+        return view('stores.show')->with('product', $product)->with('stocks', $stocks);
     }
 
     /**

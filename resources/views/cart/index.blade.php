@@ -3,7 +3,7 @@
 @include('includes.client_navbar')
 @section('content')
     <h1>Shopping Cart</h1>
-    <div class="row mt-5 ml-5 mr-5">
+      <div class="row mt-5">
             <div class="col-md-8">
               <div class="card">
                 <div class="card-header"><b>Package 1 of 1</b> </div>
@@ -14,10 +14,10 @@
                             <table class="table table-borderless table-responsive-sm">
                                 <thead>
                                     <tr>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total Price</th>
+                                      <th>Product</th>
+                                      <th>Quantity</th>
+                                      <th>Price</th>
+                                      <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -25,10 +25,12 @@
                                       <tr>
                                         
                                           <td>{{ $stock['deno_name'] }}</td>
-                                          <td>{{ $stock['price'] }}</td>
-                                          <td>2</td>
-                                          <td>200</td>                             
-                                          <td><button type="button" name="add" id="add" class="btn btn-danger">Remove</button></td> 
+                                          <td>{{ $stock['stock'] }}</td>   
+                                          <td>{{ $stock['price'] }}</td>                   
+                                          <td>
+                                            <a href="{{ route('cart.reduceByOne', ['id' => $stock['item']['id']]) }}" class="btn btn-outline-danger"><i class="fa fa-minus"></i></a>
+                                            <a href="{{ route('cart.remove', ['id' => $stock['item']['id']]) }}" class="btn btn-outline-danger"><i class="fa fa-close"></i></a>
+                                          </td> 
                                         
                                       </tr>
                                     @endforeach
@@ -64,7 +66,7 @@
                   </form>
                 </div>
                 <div class="card-footer">
-                  <button class="btn btn-lg btn-primary" type="submit">Continue Shopping</button>
+                  <a href="{{ url('/stores') }}" class="btn btn-lg btn-primary" type="submit">Continue Shopping</a>
                
                 </div>
               </div>

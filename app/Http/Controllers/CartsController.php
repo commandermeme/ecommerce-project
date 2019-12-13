@@ -96,13 +96,39 @@ class CartsController extends Controller
     public function addToCart(Request $request, $id)
     {
         $stock = Stock::find($id);
+        $product = Product::where('id', $stock->prod_id)->get();
+
+        $prod_id = $product[0];
         
+        // return $request;
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         $cart->add($stock, $stock->id);
 
         $request->session()->put('cart', $cart);
          
-        return redirect('/stores');
+        return redirect('stores/' . $prod_id->id);
+    }
+
+    public function getReduceByOne($id)
+    {
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->reduceByOne($id);
+
+        Session::put('cart', $cart);
+
+        return redirect('/cart');
+    }
+
+    public function getRemove($id)
+    {
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->remove($id);
+
+        Session::put('cart', $cart);
+
+        return redirect('/cart');
     }
 }

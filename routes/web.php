@@ -29,6 +29,8 @@ Route::get('/user/{id}/{username}', 'StoresController@showClient');
 Route::get('/user/{id}/{username}', 'StoresController@showClient');
 
 Route::get('/add-to-cart/{id}', 'CartsController@addToCart')->name('cart.addToCart');
+Route::get('/reduce/{id}', 'CartsController@getReduceByOne')->name('cart.reduceByOne');
+Route::get('/remove/{id}', 'CartsController@getRemove')->name('cart.remove');
 
 Route::resource('products', 'ProductsController');
 Route::resource('coupons', 'CouponsController');

@@ -38,18 +38,17 @@
 		</div>
 	</div> --}}
 
-	<div class="container">
-		<div class="card mt-4">
+	<div class="container my-5">
+		<div class="card">
 			<div class="row no-gutters">
 				<div class="col-md-4">
-					<img src="/storage/prod_images/{{ $prod_info->prod_image }}" class="card-img-top" alt="...">
+					<img src="/storage/prod_images/{{ $product->prod_image }}" class="card-img-top" alt="...">
 				</div>
 				<div class="col-md-8">
 					<div class="card-body mx-3">
-						<h1 class="card-title">{{ $prod_info->title }} {{ $stock->original_price .' '. $stock->original_currency}}</h1>
-						<p class="card-text">{!! $prod_info->description !!}</p>
-						<p class="lead"><strong>Price:</strong> {{ $stock->price .' '. $stock->currency }}</p>
-						<hr>
+						<h1 class="card-title">{{ $product->title }}</h1>
+						<p class="card-text">{!! $product->description !!}</p>
+						{{-- <hr>
 						<div class="row">
 							<div class="col-md-3 mb-2">
 								<h5 class="d-inline">Stock: <span class="badge badge-primary mb-1">{{ $stock->stock }}</span></h5>
@@ -65,9 +64,50 @@
 							<div class="col-md-4 mb-2">
 								<a href="{{ route('cart.addToCart', ['id' => $stock->id]) }}" class="btn btn-danger"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
 							</div>
-						</div>
+						</div> --}}
 					</div>
 				</div> 
+			</div>
+		</div>
+		<div class="card">
+			<div class="card-body">
+				<table class="table table-striped table-borderless datatable">
+					<thead>
+						<tr>
+							<th>Item</th>
+							<th>Original Price</th>
+							<th>Price</th>
+							<th>Stock Available</th>
+							{{-- <th></th> --}}
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+							
+						@foreach ($stocks as $stock)
+							<tr>
+								<td>{{ $product->title }}</td>
+								<td class="lead"><del>{{ $stock->original_price .' '. $stock->original_currency }}</del></td>
+								<td>{{ $stock->price .' '. $stock->currency }}</td>
+								<td>{{ $stock->stock }}</td>
+								{{-- <th>
+									<div class="def-number-input number-input safari_only mr-5">
+										<button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
+										<input class="quantity" min="1" max="{{ $stock->stock }}" name="stock" value="1" type="number">
+										<button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+									</div>
+								</th> --}}
+								<td>
+									<a href="{{ route('cart.addToCart', ['id' => $stock->id]) }}" class="btn btn-primary">
+										<i class="fa fa-shopping-cart"></i> Add to Cart
+									</a>
+									{{-- <button type="submit" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to Cart</button> --}}
+								</td>
+							</tr>
+						@endforeach
+						
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
