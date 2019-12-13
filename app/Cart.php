@@ -21,6 +21,7 @@ class Cart
     {
         $storedItem = [
            'price' => $item->price,
+           'deno_name' => $item->deno_name,
            'item' =>$item 
         ];
 

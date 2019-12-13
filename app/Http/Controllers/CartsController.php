@@ -22,6 +22,8 @@ class CartsController extends Controller
     {
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
+        
+
         return view('cart.index')->with('stocks', $cart->items)->with('totalPrice', $cart->totalPrice);
     }
 

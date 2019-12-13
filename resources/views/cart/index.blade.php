@@ -24,7 +24,7 @@
                                     @foreach ($stocks as $stock)
                                       <tr>
                                         
-                                          <td>Jollibee</td>
+                                          <td>{{ $stock['deno_name'] }}</td>
                                           <td>{{ $stock['price'] }}</td>
                                           <td>2</td>
                                           <td>200</td>                             
