@@ -26,7 +26,7 @@ Route::get('/items/createItem/{id}', 'ItemsController@createItem');
 Route::get('/user/{username}', 'StoresController@indexClient');
 Route::get('/user/{id}/{username}', 'StoresController@showClient');
 
-Route::get('/user/{id}/{username}', 'StoresController@showClient');
+Route::post('/items/createItem', 'ItemsController@storeItem');
 
 Route::get('/add-to-cart/{id}', 'CartsController@addToCart')->name('cart.addToCart');
 Route::get('/reduce/{id}', 'CartsController@getReduceByOne')->name('cart.reduceByOne');
