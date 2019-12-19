@@ -6,7 +6,7 @@
       <div class="row mt-5">
             <div class="col-md-8">
               <div class="card">
-                <div class="card-header"><b>Package 1 of 1</b> </div>
+                <div class="card-header"><b>Orders</b> </div>
                 <div class="card-body">
                   <form class="form-horizontal" action="" method="post">
                     @if (Session::has('cart'))
@@ -18,6 +18,7 @@
                                       <th>Quantity</th>
                                       <th>Price</th>
                                       <th></th>
+                                      <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -26,7 +27,8 @@
                                         
                                           <td>{{ $stock['deno_name'] }}</td>
                                           <td>{{ $stock['stock'] }}</td>   
-                                          <td>{{ $stock['price'] }}</td>                   
+                                          <td>{{ $stock['price'] }}</td>    
+                                          <td>{{ $stock['item']['id'] }}</td>               
                                           <td>
                                             <a href="{{ route('cart.reduceByOne', ['id' => $stock['item']['id']]) }}" class="btn btn-outline-danger"><i class="fa fa-minus"></i></a>
                                             <a href="{{ route('cart.remove', ['id' => $stock['item']['id']]) }}" class="btn btn-outline-danger"><i class="fa fa-close"></i></a>
@@ -100,7 +102,7 @@
                   </form>
                 </div>
                 <div class="card-footer ">
-                  <button class="btn btn-lg btn-primary col-md-12" type="submit">Place Order</button>
+                  <a href="{{ route('cart.info') }}" class="btn btn-lg btn-primary col-md-12">Place Order</a>
                  
                 </div>
               </div>

@@ -131,4 +131,40 @@ class CartsController extends Controller
 
         return redirect('/cart');
     }
+
+    public function info()
+    {
+        if (!Session::get('cart')) {
+            return redirect('/stores');
+        }
+        return view('cart.info');
+    }
+
+    public function checkout(Request $request) 
+    {
+        if (!Session::get('cart')) {
+            return redirect('/stores');
+        }
+
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+
+        $cart_items = $cart->items;
+
+        // return $cart_items;
+        
+        foreach ($cart_items as $item) {
+           $items = $item['item']['id'];
+           $stocks = Stock::find($items);
+           
+           
+            echo $stocks->id;
+        
+        }
+
+        
+
+        // Session::forget('cart');
+        // return redirect('/cart');
+    }
 }

@@ -31,6 +31,8 @@ Route::post('/items/createItem', 'ItemsController@storeItem');
 Route::get('/add-to-cart/{id}', 'CartsController@addToCart')->name('cart.addToCart');
 Route::get('/reduce/{id}', 'CartsController@getReduceByOne')->name('cart.reduceByOne');
 Route::get('/remove/{id}', 'CartsController@getRemove')->name('cart.remove');
+Route::post('/checkout}', 'CartsController@checkout')->name('cart.checkout');
+Route::get('/checkout/info}', 'CartsController@info')->name('cart.info');
 
 Route::resource('products', 'ProductsController');
 Route::resource('coupons', 'CouponsController');
