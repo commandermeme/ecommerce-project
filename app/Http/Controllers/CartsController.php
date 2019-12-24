@@ -142,7 +142,7 @@ class CartsController extends Controller
 
     public function checkout(Request $request) 
     {
-        if (!Session::get('cart')) {
+        if (!Session::get('cart') || Session::get('cart')->totalQty == 0) {
             return redirect('/stores');
         }
 
@@ -154,17 +154,24 @@ class CartsController extends Controller
         // return $cart_items;
         
         foreach ($cart_items as $item) {
-           $items = $item['item']['id'];
-           $stocks = Stock::find($items);
-           
-           
-            echo $stocks->id;
-        
+            $item_stocks = $item['stock'];
+            $items = $item['item']['id'];
+            $stocks = Stock::find($items);
+            
+            
+            // echo 'Stock ID: '. $stocks->id .' Quantity: '. $item_stocks .' Available: '. $stocks->stock .'<br>';
+
+            $items = Item::where('stock_id', $stocks->id)->where('status', 1)->take($item_stocks)->update([
+                'status' => 0
+            ]);
+            
+            // echo $items .'<br>';
+            
         }
 
-        
+        // echo  $request;
 
-        // Session::forget('cart');
-        // return redirect('/cart');
+        Session::forget('cart');
+        return redirect('/cart');
     }
 }
