@@ -9,6 +9,9 @@ use App\Product;
 use App\Item;
 use App\Stock;
 use App\Denomination;
+use App\Order;
+use App\OrderItem;
+use App\OrderProduct;
 use Session;
 
 class CartsController extends Controller
@@ -149,28 +152,53 @@ class CartsController extends Controller
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
 
-        $cart_items = $cart->items;
+        $total_price = $cart->totalPrice;
 
-        // return $cart_items;
+        $orders = new Order;
+        $orders->email = $request->email;
+        $orders->total_price = $total_price;
+        $orders->currency = 'Php (trial)';
+        $orders->payment_method = 'Paypal (trial)';
+        $orders->save();
+
+        $cart_items = $cart->items;
         
         foreach ($cart_items as $item) {
             $item_stocks = $item['stock'];
             $items = $item['item']['id'];
             $stocks = Stock::find($items);
-            
-            
-            // echo 'Stock ID: '. $stocks->id .' Quantity: '. $item_stocks .' Available: '. $stocks->stock .'<br>';
 
-            $items = Item::where('stock_id', $stocks->id)->where('status', 1)->take($item_stocks)->update([
-                'status' => 0
-            ]);
+            $order_products = new OrderProduct;
+            $order_products->order_id = $orders->id;
+            $order_products->product_name = $stocks->deno_name;
+            $order_products->original_price = $stocks->original_price;
+            $order_products->original_currency = $stocks->original_currency;
+            $order_products->price = $stocks->price;
+            $order_products->currency = $stocks->currency;
+            $order_products->quantity = $item_stocks;
+            $order_products->total_price = $stocks->price * $item_stocks;
+            $order_products->save();
+
+            $items = Item::where('stock_id', $stocks->id)->where('status', 1)->take($item_stocks)->pluck('code');
             
-            // echo $items .'<br>';
+            // echo $items->get() .'<br>';
+            foreach ($items as $key => $value) {
+                $order_items = new OrderItem;
+                $order_items->order_id = $orders->id;
+                $order_items->order_product_id = $order_products->id;
+                
+                $order_items->code = $items[$key];
+                
+                $order_items->save();
+            }
+            if($order_items->save()) {
+                $items->update([
+                    'status' => 0
+                ]);
+            }
             
         }
-
-        // echo  $request;
-
+        
         Session::forget('cart');
         return redirect('/cart');
     }

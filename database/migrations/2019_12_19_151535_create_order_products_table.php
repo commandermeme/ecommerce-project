@@ -22,6 +22,7 @@ class CreateOrderProductsTable extends Migration
             $table->string('price');
             $table->string('currency');
             $table->string('quantity');
+            $table->float('total_price');
             $table->timestamps();
         });
     }
