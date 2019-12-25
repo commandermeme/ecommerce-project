@@ -17,9 +17,9 @@ Route::get('/about', 'PagesController@about');
 Route::get('/pricing', 'PagesController@pricing');
 Route::get('/developer', 'PagesController@developer');
 
-Route::get('/dashboard', 'DashboardController@index');
-Route::get('/analytics', 'AnalyticsController@index');
-Route::get('/queries', 'QueriesController@index');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('user');
+Route::get('/analytics', 'AnalyticsController@index')->middleware('user');
+Route::get('/queries', 'QueriesController@index')->middleware('user');
 Route::get('/showStocks/{id}', 'StocksController@showStocks');
 Route::get('/items/createItem/{id}', 'ItemsController@createItem');
 Route::get('/user/{username}', 'StoresController@indexClient');
@@ -33,20 +33,24 @@ Route::get('/remove/{id}', 'CartsController@getRemove')->name('cart.remove');
 Route::post('/checkout', 'CartsController@checkout')->name('cart.checkout');
 Route::get('/checkout/info', 'CartsController@info')->name('cart.info');
 
-Route::get('/security', 'SettingsController@security')->name('settings.security');
-Route::get('/general', 'SettingsController@general')->name('settings.general');
-Route::get('/payments', 'SettingsController@payments')->name('settings.payments');
+Route::get('/security', 'SettingsController@security')->name('settings.security')->middleware('user');
+Route::get('/general', 'SettingsController@general')->name('settings.general')->middleware('user');
+Route::get('/payments', 'SettingsController@payments')->name('settings.payments')->middleware('user');
 
-Route::resource('products', 'ProductsController');
-Route::resource('coupons', 'CouponsController');
-Route::resource('blacklist', 'BlacklistController');
+// Route::get('/admin', 'DashboardController@admin')->name('admin.index')->middleware('admin');
+
+Route::resource('products', 'ProductsController')->middleware('user');
+Route::resource('coupons', 'CouponsController')->middleware('user');
+Route::resource('blacklist', 'BlacklistController')->middleware('user');
 Route::resource('user_pages', 'UserPagesController');
 Route::resource('stores', 'StoresController');
-Route::resource('items', 'ItemsController');
-Route::resource('stocks', 'StocksController');
+Route::resource('items', 'ItemsController')->middleware('user');
+Route::resource('stocks', 'StocksController')->middleware('user');
 Route::resource('cart', 'CartsController');
-Route::resource('orders', 'OrdersController');
-Route::resource('settings', 'SettingsController');
+Route::resource('orders', 'OrdersController')->middleware('user');
+Route::resource('settings', 'SettingsController')->middleware('user');
+Route::resource('admin', 'AdminsController')->middleware('admin');
+Route::resource('resellers', 'ResellersController')->middleware('admin');
 
 Auth::routes(['verify' => true]);
 
