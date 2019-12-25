@@ -27,7 +27,7 @@
                                         
                                           <td>{{ $stock['deno_name'] }}</td>
                                           <td>{{ $stock['stock'] }}</td>   
-                                          <td>{{ $stock['price'] }}</td>    
+                                          <td>{{ $stock['price'] .' '. $stock['currency'] }}</td>    
                                           <td>{{ $stock['item']['id'] }}</td>               
                                           <td>
                                             <a href="{{ route('cart.reduceByOne', ['id' => $stock['item']['id']]) }}" class="btn btn-outline-danger"><i class="fa fa-minus"></i></a>
@@ -95,7 +95,7 @@
                         </div>
                         
                         <div class="col-md-4 mt-0">
-                            <p>{{ $totalPrice }}</p>
+                            <p>{{ $totalPrice .' '. $currency}}</p>
                         </div>
                     </div>
                     

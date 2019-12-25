@@ -27,7 +27,7 @@ class CartsController extends Controller
         $cart = new Cart($oldCart);
         
 
-        return view('cart.index')->with('stocks', $cart->items)->with('totalPrice', $cart->totalPrice);
+        return view('cart.index')->with('stocks', $cart->items)->with('totalPrice', $cart->totalPrice)->with('currency', $cart->currency);
     }
 
     /**
@@ -121,6 +121,10 @@ class CartsController extends Controller
 
         Session::put('cart', $cart);
 
+        if($cart->totalQty == 0) {
+            Session::forget('cart');
+        }
+
         return redirect('/cart');
     }
 
@@ -131,6 +135,10 @@ class CartsController extends Controller
         $cart->remove($id);
 
         Session::put('cart', $cart);
+
+        if($cart->totalQty == 0) {
+            Session::forget('cart');
+        }
 
         return redirect('/cart');
     }
@@ -157,7 +165,7 @@ class CartsController extends Controller
         $orders = new Order;
         $orders->email = $request->email;
         $orders->total_price = $total_price;
-        $orders->currency = 'Php (trial)';
+        $orders->currency = $cart->currency;
         $orders->payment_method = 'Paypal (trial)';
         $orders->save();
 
@@ -192,11 +200,17 @@ class CartsController extends Controller
                 $order_items->save();
             }
             if($order_items->save()) {
-                $items->update([
+                $items = Item::where('stock_id', $stocks->id)->where('status', 1)->take($item_stocks)->update([
                     'status' => 0
                 ]);
             }
             
+            $items = Item::where('stock_id', $stocks->id)->where('status', 1)->take($item_stocks)->count();
+
+            $stocks->update([
+                'stock' => $items
+            ]);
+
         }
         
         Session::forget('cart');

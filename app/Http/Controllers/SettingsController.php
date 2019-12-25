@@ -3,27 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Order;
-use App\OrderProduct;
-use App\OrderItem;
 
-class OrdersController extends Controller
+class SettingsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware(['auth', 'verified']);
-    }
-
     public function index()
     {
-        $orders = Order::all();
-
-        return view('orders.index')->with('orders', $orders);
+        return view('settings.includes.general');
     }
 
     /**
@@ -90,5 +80,20 @@ class OrdersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function general()
+    {       
+        return view('settings.includes.general');
+    }
+
+    public function security()
+    {
+        return view('settings.includes.security');
+    }
+
+    public function payments()
+    {
+        return view('settings.includes.payments');
     }
 }

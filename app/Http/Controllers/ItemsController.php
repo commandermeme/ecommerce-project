@@ -165,7 +165,7 @@ class ItemsController extends Controller
         $stock_id = Stock::where('deno_name', $item->deno_name)->get();
 
         if($item->delete()) {
-            $items = $item->where('deno_name', $item->deno_name)->count();
+            $items = $item->where('deno_name', $item->deno_name)->where('status', 1)->count();
 
             $stock = Stock::where('deno_name', $item->deno_name)->update([
                 'stock' => $items
@@ -211,10 +211,11 @@ class ItemsController extends Controller
             $item->code = $coded[$key];
             $item->deno_name = $deno_name;
             $item->save();
+            Item::where('deno_name', $deno_name)->update(['stock_id' => $stock_id]);
         }
 
         if ($item->save()) {
-            $items = $item->where('deno_name', $deno_name)->count();
+            $items = $item->where('deno_name', $deno_name)->where('status', 1)->count();
 
             $stock = Stock::where('deno_name', $deno_name)->update([
                 // 'prod_id' => $prod_id,

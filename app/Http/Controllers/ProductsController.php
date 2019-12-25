@@ -105,7 +105,7 @@ class ProductsController extends Controller
         }
         
         if ($item->save()) {
-            $items = $item->where('deno_name', $deno_name)->count();
+            $items = $item->where('deno_name', $deno_name)->where('status', 1)->count();
         
             $stock = new Stock;
             $stock->prod_id = $product->id;
