@@ -119,9 +119,10 @@ class StoresController extends Controller
 
     public function showClient($id) 
     {
-        $product =  Product::find($id);
-        $stocks = Stock::all();
-        
+        $product = Product::find($id);
+        $stock = Stock::where('prod_id', $product->id)->get();
+        $stocks = $stock->all();
+
         return view('stores.show')->with('product', $product)->with('stocks', $stocks);
     }
 }
