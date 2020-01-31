@@ -16,6 +16,7 @@
     <link href="{{ asset('dist/vendors/datatables.net-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet">
     <link href="{{ asset('dist/vendors/quill/css/quill.snow.css') }}" rel="stylesheet">
     <link href="{{ asset('dist/vendors/ion-rangeslider/css/ion.rangeSlider.min.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('lib/bootstrap/css/bootstrap.min.css" rel="stylesheet') }}" media="all" rel="stylesheet" type="text/css"> --}}
 
     <!--Icons-->
     {{-- <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet"> --}}

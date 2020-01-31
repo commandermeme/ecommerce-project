@@ -36,6 +36,9 @@ Route::get('/checkout/info', 'CartsController@info')->name('cart.info');
 Route::get('/security', 'SettingsController@security')->name('settings.security')->middleware('user');
 Route::get('/general', 'SettingsController@general')->name('settings.general')->middleware('user');
 Route::get('/payments', 'SettingsController@payments')->name('settings.payments')->middleware('user');
+Route::get('/admin_security', 'AdminSettingsController@security')->name('admin_settings.security')->middleware('admin');
+Route::get('/admin_general', 'AdminSettingsController@general')->name('admin_settings.general')->middleware('admin');
+Route::get('/admin_payments', 'AdminSettingsController@payments')->name('admin_settings.payments')->middleware('admin');
 
 // Route::get('/admin', 'DashboardController@admin')->name('admin.index')->middleware('admin');
 
@@ -51,6 +54,7 @@ Route::resource('orders', 'OrdersController')->middleware('user');
 Route::resource('settings', 'SettingsController')->middleware('user');
 Route::resource('admin', 'AdminsController')->middleware('admin');
 Route::resource('resellers', 'ResellersController')->middleware('admin');
+Route::resource('admin_settings', 'AdminSettingsController')->middleware('admin');
 
 Auth::routes(['verify' => true]);
 

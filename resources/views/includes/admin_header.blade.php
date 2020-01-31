@@ -81,7 +81,7 @@
                 <i class="fa fa-cart-plus"></i> Purchases
             </a> --}}
 
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="{{ route('admin_settings.index') }}">
                 <i class="fa fa-wrench"></i> Settings
             </a>
             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
