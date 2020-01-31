@@ -8,6 +8,7 @@ class Cart
     public $totalPrice = 0;
     public $totalQty = 0;
     public $currency = null;
+    public $prod_id = null;
 
     public function __construct($oldcart) 
     {
@@ -16,6 +17,7 @@ class Cart
             $this->totalQty = $oldcart->totalQty;
             $this->totalPrice = $oldcart->totalPrice;
             $this->currency = $oldcart->currency;
+            $this->prod_id = $oldcart->prod_id;
         }
     }
 
@@ -26,6 +28,7 @@ class Cart
            'price' => $item->price,
            'currency' => $item->currency,
            'deno_name' => $item->deno_name,
+           'prod_id' => $item->prod_id,
            'item' =>$item 
         ];
         if($this->items) {
@@ -40,6 +43,7 @@ class Cart
         $this->totalQty++;
         $this->totalPrice += $item->price;
         $this->currency = $item->currency;
+        $this->prod_id = $item->prod_id;
     }
 
     public function reduceByOne($id)

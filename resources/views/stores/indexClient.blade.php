@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@include('includes.client_navbar')
+@include('includes.client_user_navbar')
 
 @section('content')
 	{{-- <div class="container">

@@ -123,6 +123,9 @@ class StoresController extends Controller
         $stock = Stock::where('prod_id', $product->id)->get();
         $stocks = $stock->all();
 
-        return view('stores.show')->with('product', $product)->with('stocks', $stocks);
+        $user = User::where('id', $product->user_id)->get();
+        $user_info = $user[0];
+
+        return view('stores.showClient')->with('product', $product)->with('stocks', $stocks)->with('user_info', $user_info);
     }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@include('includes.client_navbar')
+@include('includes.client_user_navbar')
 
 @section('content')
 	{{-- <div class="container">
@@ -101,7 +101,7 @@
 									</div>
 								</th> --}}
 								<td>
-									<a href="{{ route('cart.addToCart', ['id' => $stock->id]) }}" class="btn btn-primary">
+									<a href="{{ route('cart.addToCartUser', ['id' => $stock->id]) }}" class="btn btn-primary">
 										<i class="fa fa-shopping-cart"></i> Add to Cart
 									</a>
 									{{-- <button type="submit" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to Cart</button> --}}

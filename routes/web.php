@@ -33,6 +33,11 @@ Route::get('/remove/{id}', 'CartsController@getRemove')->name('cart.remove');
 Route::post('/checkout', 'CartsController@checkout')->name('cart.checkout');
 Route::get('/checkout/info', 'CartsController@info')->name('cart.info');
 
+Route::get('/user-add-to-cart/{id}', 'CartsController@addToCartUser')->name('cart.addToCartUser');
+Route::get('/user-cart', 'CartsController@indexClient')->name('cart.indexClient');
+Route::get('/user-reduce/{id}', 'CartsController@getReduceByOneUser')->name('cart.reduceByOneUser');
+Route::get('/user-remove/{id}', 'CartsController@getRemoveUser')->name('cart.removeUser');
+
 Route::get('/security', 'SettingsController@security')->name('settings.security')->middleware('user');
 Route::get('/general', 'SettingsController@general')->name('settings.general')->middleware('user');
 Route::get('/payments', 'SettingsController@payments')->name('settings.payments')->middleware('user');

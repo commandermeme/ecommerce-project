@@ -26,8 +26,19 @@ class CartsController extends Controller
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
         
-
         return view('cart.index')->with('stocks', $cart->items)->with('totalPrice', $cart->totalPrice)->with('currency', $cart->currency);
+    }
+
+    public function indexClient()
+    {
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        
+        $products = Product::all();
+        $users = User::all();
+
+        // return $cart->items;
+        return view('cart.indexClient')->with('stocks', $cart->items)->with('totalPrice', $cart->totalPrice)->with('currency', $cart->currency)->with('prod_id', $cart->prod_id)->with('products', $products)->with('users', $users);
     }
 
     /**
@@ -113,6 +124,26 @@ class CartsController extends Controller
         return redirect('stores/' . $prod_id->id);
     }
 
+    public function addToCartUser(Request $request, $id)
+    {
+        $stock = Stock::find($id);
+        $product = Product::where('id', $stock->prod_id)->get();
+
+        $prod_id = $product[0];
+
+        $user = User::where('id', $prod_id->user_id)->get();
+        $user_info = $user[0];
+        
+        // return $request;
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->add($stock, $stock->id);
+
+        $request->session()->put('cart', $cart);
+         
+        return redirect('user/'. $prod_id->id .'/'. $user_info->name);
+    }
+
     public function getReduceByOne($id)
     {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
@@ -128,6 +159,21 @@ class CartsController extends Controller
         return redirect('/cart');
     }
 
+    public function getReduceByOneUser($id)
+    {
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->reduceByOne($id);
+
+        Session::put('cart', $cart);
+
+        if($cart->totalQty == 0) {
+            Session::forget('cart');
+        }
+
+        return redirect('/user-cart');
+    }
+
     public function getRemove($id)
     {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
@@ -141,6 +187,21 @@ class CartsController extends Controller
         }
 
         return redirect('/cart');
+    }
+
+    public function getRemoveUser($id)
+    {
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->remove($id);
+
+        Session::put('cart', $cart);
+
+        if($cart->totalQty == 0) {
+            Session::forget('cart');
+        }
+
+        return redirect('/user-cart');
     }
 
     public function info()
